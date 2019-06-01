@@ -1,12 +1,24 @@
+<div class="nav-bar">
 <h1>Dashboard</h1>
-
-<p>Welcome</p>
 <a>Sign Out</a>
+</div>
+<p>Welcome</p>
 
+<div class="side-bar">
+<ul>
+    <li>Test</li>
+</ul>
+
+</div>
+
+
+
+<div class="quiz-table">
 <ul>
  {{#each quizlist}}
 <li>
-<a href="/quiz/{{quizid}}">{{quizname}}</a>
+<a href="/quiz/{{quizid}}">{{quizname}}</a><img id="delete-button" src="/assets/delete-button.svg">
 </li>
 {{/each}}
 </ul>
+</div>

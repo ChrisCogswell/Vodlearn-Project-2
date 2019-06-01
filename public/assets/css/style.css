@@ -2,22 +2,101 @@ body{
     background-color: white;
     color: black;
     font-family: 'Open Sans', sans-serif;
+    padding: 0px;
+    margin: 0px;
 }
-.login-container{
+.account-container{
     background-color:rgb(179, 187, 185);
     border-radius:10px;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     padding: 10px;
+    height: 50%;
+    display: block;
+    box-shadow: 5px 10px 8px 5px #f0b7b77c;
+    text-align: center;
+
+
+
+}
+.login-container{
+    display: inline-block;
+    border: 2px solid red;
+    width: 50%;
 }
 #login-form *{
-    display:block;
+
     text-align: center;
-    font-size: 16px;
+    font-size: 23px;
     margin: 5px auto;
 }
 #login-form input{
     border-width: 0px;
-    background-color:none;
+    background-color:rgb(179, 187, 185);
+    border-width: 0 0 3px 0;
+    border-style: solid;
+    border-color: darkgray;
+    color: gray;
+    display:block;
+    border-radius: 3px;
+
 }
+#login-button{
+border: 2px solid gray;
+border-width: 2px 2px 2px 2px;
+}
+#login-button:hover{
+background-color: darkgray;
+}
+.form-group{
+    display: inline;
+    width: 100%;
+}
+#form-label{
+    font-size: 15px;
+    float: left;
+}
+
+
+.submit-button{
+   border-width: 2px; 
+   background-color: darkgray;
+}
+
+
+.side-bar{
+    position: absolute;
+    height: 100%;
+    background-color: blue;
+    width: 20%;
+
+}
+
+.signup-container{
+    height: 100%;
+    position: relative;
+    top: 0;
+    display: inline;
+    border: 2px solid red;
+    margin: 0 auto;
+  
+}
+.nav-bar{
+    position: relative; 
+    top: 0;
+    width: 100%;
+    display: inline-block;
+    background-color: gray;
+}
+.quiz-table{
+    position: static;
+    float: right;
+    width: 60%;
+    border:  2px solid lightgray;
+    border-radius: 10px;
+}
+#delete-button:hover{
+background-color: green;
+}
+
 
