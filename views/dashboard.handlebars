@@ -1,0 +1,12 @@
+<h1>Dashboard</h1>
+
+<p>Welcome</p>
+<a>Sign Out</a>
+
+<ul>
+ {{#each quizlist}}
+<li>
+<a href="/quiz/{{quizid}}">{{quizname}}</a>
+</li>
+{{/each}}
+</ul>
