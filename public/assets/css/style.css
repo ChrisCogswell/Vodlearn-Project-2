@@ -1,30 +1,30 @@
 body{
-    background-color: white;
+    background-color: rgb(70, 168, 224);
     color: black;
     font-family: 'Open Sans', sans-serif;
     padding: 0px;
     margin: 0px;
 }
 .account-container{
-    background-color:rgb(179, 187, 185);
+    background-color:white;
     border-radius:10px;
-    width: 60%;
+    border-width: 0px;
+    width: 70%;
     margin: 0 auto;
     /* padding: 10px; */
-    height: 100%;
+    height: 400px;
     display: block;
     box-shadow: 5px 10px 8px 5px rgba(0, 0, 0, 0.137);
     text-align: center;
-    overflow: auto;
-    
-
-
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif;
+    white-space: nowrap;
 }
 .login-container{
     display: inline-block;
-    border: 2px solid red;
-    width: 40%;
-    height: 100%;
+    /* border: 2px solid red; */
+    width: 50%;
+    height: 400px;
 }
 #login-form *{
 
@@ -32,23 +32,42 @@ body{
     font-size: 23px;
     margin: 5px auto;
 }
+
+#signup-form{
+    display: none;
+    font-size: 23px;
+    margin: 5px auto;
+    text-align: center;
+}
+
+.signup-text{
+    font-size: 23px;
+    margin: 5px auto;
+    text-align: center;
+}
+
  input{
     border-width: 0px;
-    background-color:rgb(179, 187, 185);
+    background-color:inherit;
     border-width: 0 0 3px 0;
     border-style: solid;
     border-color: darkgray;
-    color: gray;
+    color: lightgray;
     display:block;
     border-radius: 3px;
-
+    font-family: 'Oswald', sans-serif;
 }
+
+
 #login-button{
 color: white;
 border: 2px solid gray;
 border-width: 2px 2px 2px 2px;
 background-color: rgb(75, 169, 224);
 box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
+font-family: 'Oswald', sans-serif;
+margin-top: 20px;
+    
 }
 #login-button:hover{
 background-color: darkgray;
@@ -71,6 +90,7 @@ display: inline;
 .submit-button{
    border-width: 2px; 
    background-color: darkgray;
+   
 }
 
 
@@ -83,27 +103,40 @@ display: inline;
 }
 
 .signup-container{
-    height: 200px;
-    width: 40%;
+    background-color: tomato;
+    height: 400px;
+    width: 50%;
     /* position: relative;
     top: 0; */
     display: inline-block;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     /* margin: 0 auto; */
-  vertical-align:top
+    vertical-align:top
 }
 #signup-button{
-font-size: 16px;
+font-size: 30px;
 background-color:rgb(75, 169, 224);
 color: white;
-font-family: 'Open Sans', sans-serif;
+border: 2px solid gray;
+border-width: 2px 2px 2px 2px;
+background-color: rgb(75, 169, 224);
+box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
+color: white;
+font-family: 'Oswald', sans-serif;
+    
+/* padding: 70px 0; */
+width: 50%;
+position: relative;
+top: 50%;
+border-radius: 5px;
+transform: translate(0%, -50%);
 }
 .nav-bar{
     position: relative; 
     top: 0;
     width: 100%;
     display: inline-block;
-    background-color: gray;
+    background-color: white;
     padding: 10px;
 }
 #sign-out{
