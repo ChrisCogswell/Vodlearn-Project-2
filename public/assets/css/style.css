@@ -10,19 +10,21 @@ body{
     border-radius:10px;
     width: 60%;
     margin: 0 auto;
-    padding: 10px;
-    height: 50%;
+    /* padding: 10px; */
+    height: 100%;
     display: block;
-    box-shadow: 5px 10px 8px 5px #f0b7b77c;
+    box-shadow: 5px 10px 8px 5px rgba(0, 0, 0, 0.137);
     text-align: center;
-
+    overflow: auto;
+    
 
 
 }
 .login-container{
     display: inline-block;
     border: 2px solid red;
-    width: 50%;
+    width: 40%;
+    height: 100%;
 }
 #login-form *{
 
@@ -30,7 +32,7 @@ body{
     font-size: 23px;
     margin: 5px auto;
 }
-#login-form input{
+ input{
     border-width: 0px;
     background-color:rgb(179, 187, 185);
     border-width: 0 0 3px 0;
@@ -42,8 +44,11 @@ body{
 
 }
 #login-button{
+color: white;
 border: 2px solid gray;
 border-width: 2px 2px 2px 2px;
+background-color: rgb(75, 169, 224);
+box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 #login-button:hover{
 background-color: darkgray;
@@ -56,7 +61,12 @@ background-color: darkgray;
     font-size: 15px;
     float: left;
 }
-
+.nav-bar-list{
+display: inline;
+}
+.nav-bar h1{
+    display: inline;
+}
 
 .submit-button{
    border-width: 2px; 
@@ -67,19 +77,26 @@ background-color: darkgray;
 .side-bar{
     position: absolute;
     height: 100%;
-    background-color: blue;
+    background-color:rgb(75, 169, 224);
     width: 20%;
 
 }
 
 .signup-container{
-    height: 100%;
-    position: relative;
-    top: 0;
-    display: inline;
+    height: 200px;
+    width: 40%;
+    /* position: relative;
+    top: 0; */
+    display: inline-block;
     border: 2px solid red;
-    margin: 0 auto;
-  
+    /* margin: 0 auto; */
+  vertical-align:top
+}
+#signup-button{
+font-size: 16px;
+background-color:rgb(75, 169, 224);
+color: white;
+font-family: 'Open Sans', sans-serif;
 }
 .nav-bar{
     position: relative; 
@@ -87,16 +104,40 @@ background-color: darkgray;
     width: 100%;
     display: inline-block;
     background-color: gray;
+    padding: 10px;
+}
+#sign-out{
+    float: right;
+   margin: 5px;
 }
 .quiz-table{
     position: static;
-    float: right;
+    /* float: right; */
     width: 60%;
     border:  2px solid lightgray;
     border-radius: 10px;
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+  
 }
 #delete-button:hover{
 background-color: green;
 }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
 
 
