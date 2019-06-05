@@ -33,10 +33,10 @@ router.get("/quiz/:quizid", function(req, res) {
     res.render("quiz",quizinfo);
 });
 
-router.post("/login",(req,res)=>{
-    console.log(req.body.username);
-    res.redirect("/dashboard/"+req.body.username);
-});
+// router.post("/login",(req,res)=>{
+//     console.log(req.body.username);
+//     res.redirect("/dashboard/"+req.body.username);
+// });
 
 
 
