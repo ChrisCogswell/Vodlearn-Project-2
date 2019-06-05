@@ -79,4 +79,30 @@ router.post('/signup', (req,res)=>{
 
 });
 
+router.get("/dashboard/:username", function(req, res) {
+    var userinfo={
+        name:req.params.username
+    }
+    var quizinfo={
+        quizlist:[
+        {quizname:"Quiz 1" ,quizid:1},{quizname:"Quiz 2", quizid:2}
+    ]};
+
+    res.render("dashboard",quizinfo);
+});
+
+
 module.exports = router;
+
+
+
+function isAuthenticated(req, res,next){
+
+if(cognitoUser.getUsername()=req.params){
+next();
+}
+else{
+    res.redirect("/")
+}
+
+}

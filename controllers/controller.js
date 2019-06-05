@@ -10,17 +10,6 @@ router.get("/", function(req, res) {
     res.render("index");
 });
 
-router.get("/dashboard/:username", function(req, res) {
-    var userinfo={
-        name:req.params.username
-    }
-    var quizinfo={
-        quizlist:[
-        {quizname:"Quiz 1" ,quizid:1},{quizname:"Quiz 2", quizid:2}
-    ]};
-
-    res.render("dashboard",quizinfo);
-});
 
 router.get("/quiz/:quizid", function(req, res) {
     var userinfo={
