@@ -7,7 +7,8 @@ var router = express.Router();
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    res.render("index");
+    res.render("dashboard");
+    // switch back to index
 });
 
 router.get("/dashboard/:username", function(req, res) {

@@ -16,14 +16,14 @@
 <div class="quiz-table">
 <table>
      <tr>
-    <th>Quiz Name</th>
+    <th id="quiz-name">Quiz Name</th>
     <th>Date Created</th> 
     <th>Invitees</th>
     <th></th>
   </tr>
- {{#each quizlist}}
+ {{#each quiz_name}}
  <tr>
-  <td><a href="/quiz/{{quizid}}">{{quizname}}</a></td>
+  <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td>
     <td>12/23/2345</td> 
     <td>12</td>
     <td><img id="delete-button" src="/assets/delete-button.svg"></td>
@@ -31,3 +31,5 @@
 {{/each}}
 </table>
 </div>
+
+		<script src="../assets/js/dashboard.js"></script>
