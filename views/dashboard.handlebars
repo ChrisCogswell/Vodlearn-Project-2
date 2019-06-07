@@ -6,15 +6,17 @@
 
 <div class="side-bar">
 <ul class="dash-list">
-    <li class="dash-listitem"><a>My Courses</a></li>
-    <li class="dash-listitem"><a>Settings</a></li>
+    <li id="quizlist-button" class="dash-listitem"><a>My Courses</a></li>
+    <li id="settings-button" class="dash-listitem">Settings</li>
 </ul>
 
 </div>
 
 
 
-<div class="quiz-table">
+<div id="display-stage">
 
-{{> settings/settings-block sleep=false}}
+{{> settings/quizlist-block sleep=false}}
 </div>
+
+

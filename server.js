@@ -5,6 +5,7 @@ var PORT = process.env.PORT || 3000;
 var db = require("./models");
 
 var app = express();
+var Handlebars=require("handlebars");
 
 app.use(express.static("public"));
 
@@ -30,3 +31,11 @@ db.sequelize.sync().then(function() {
 
 
 
+// 
+Handlebars.registerHelper("equals", function(string1 ,string2, options) {
+  if (string1 === string2) {
+      return options.fn(this);
+  } else {
+      return options.inverse(this);
+  }
+});

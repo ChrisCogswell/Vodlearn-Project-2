@@ -14,3 +14,15 @@
     </tr>
 {{/each}}
 </table>
+<button onclick="addQuiz()" id="addquiz-button" class="dashboard-button">+Add Course</button>
+
+
+    <script>
+function addQuiz(){
+    console.log('Display Add Quiz');
+        $.get( '/addquiz', function( data ) {
+            $( '#display-stage' ).html( data );
+            // document.getElementById('display-stage').innerHTML=data;
+          });
+    }
+</script>
