@@ -1,7 +1,8 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $exampleList = $("#example-list");
+
+// var $exampleText = $("#example-text");
+// var $exampleDescription = $("#example-description");
+// var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -11,19 +12,19 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      url: "api/quizlist",
       data: JSON.stringify(example)
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/quizlist",
       type: "GET"
     });
   },
   deleteExample: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/quizlist/" + id,
       type: "DELETE"
     });
   }
@@ -57,41 +58,45 @@ var refreshExamples = function() {
     $exampleList.append($examples);
   });
 };
+
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
 
-  var example = {
-    question: $exampleText.val().trim(),
-    question_type: $exampleDescription.val().trim()
-  };
+// var handleFormSubmit = function(event) {
+//   event.preventDefault();
 
-  if (!(example.question && example.question_type)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
+//   var example = {
+//     question: $exampleText.val().trim(),
+//     question_type: $exampleDescription.val().trim()
+//   };
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
+//   if (!(example.question && example.question_type)) {
+//     alert("You must enter an example text and description!");
+//     return;
+//   }
 
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
+//   API.saveExample(example).then(function() {
+//     refreshExamples();
+//   });
+
+//   $exampleText.val("");
+//   $exampleDescription.val("");
+// };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
 
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+// var handleDeleteBtnClick = function() {
+//   var idToDelete = $(this)
+//     .parent()
+//     .attr("data-id");
+
+//   API.deleteExample(idToDelete).then(function() {
+//     refreshExamples();
+//   });
+// };
+
+// // Add event listeners to the submit and delete buttons
+// $submitBtn.on("click", handleFormSubmit);
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
