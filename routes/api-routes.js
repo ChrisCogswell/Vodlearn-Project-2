@@ -1,24 +1,16 @@
 var express = require("express");
 var router = express.Router();
-var user;
-var idToken;
-var session;
-const request=require('request');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-var jwt = require('jsonwebtoken');
-var jwkToPem = require('jwk-to-pem');
 global.fetch = require('node-fetch');
-const pool_region = 'us-east-1';
-var poolData = { UserPoolId : 'us-east-2_vq6Vzx6C2',
-ClientId : '5cq5r66nb5dqqgffau4g102hvo'
-};
 
 router.post('/signup', (req,res)=>{
 
     console.log(req.body);
-   
+    var poolData = { UserPoolId : 'us-east-2_vq6Vzx6C2',
+        ClientId : '5cq5r66nb5dqqgffau4g102hvo'
+    };
     var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-   
+    
     var attributeList = [];
     
     var dataEmail = {
@@ -45,7 +37,6 @@ router.post('/signup', (req,res)=>{
             return;
         }
         cognitoUser = result.user;
-        user=result.user;
         console.log('user name is ' + cognitoUser.getUsername());
         res.redirect('/');
     
@@ -65,7 +56,6 @@ router.post('/signup', (req,res)=>{
             ClientId : '5cq5r66nb5dqqgffau4g102hvo'
         };
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-    Session();
         var userData = {
             Username : req.body.username,
             Pool : userPool
@@ -74,9 +64,9 @@ router.post('/signup', (req,res)=>{
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function (result) {
                 var accessToken = result.getAccessToken().getJwtToken();
-                user=cognitoUser;
+                
                 /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer*/
-                 idToken = result.idToken.jwtToken;
+                var idToken = result.idToken.jwtToken;
                 res.redirect('/dashboard/'+cognitoUser.getUsername());
             },
     
@@ -88,7 +78,7 @@ router.post('/signup', (req,res)=>{
 
 
 });
-router.use('/dashboard/',isAuthenticated);
+
 router.get("/dashboard/:username", function(req, res) {
     var userinfo={
         name:req.params.username
@@ -105,26 +95,14 @@ router.get("/dashboard/:username", function(req, res) {
 module.exports = router;
 
 
-//This is probably insecure. Rewrite using tokens
-function isAuthenticated(req, res,next){
-console.log("Middleware");
 
-if(ValidateToken(idToken)){
-    console.log("Success");
+function isAuthenticated(req, res,next){
+
+if(cognitoUser.getUsername()=req.params){
 next();
 }
 else{
-    console.log("Failure to Authenticate Token");
     res.redirect("/")
 }
 
 }
-
-
-function ValidateToken(token) {
-    //TODO Needs to actually validate token
-    return true;
-}
-
-
-

@@ -1,0 +1,16 @@
+<table>
+     <tr>
+    <th>Quiz Name</th>
+    <th>Date Created</th> 
+    <th>Invitees</th>
+    <th></th>
+  </tr>
+ {{#each quizlist}}
+ <tr>
+  <td><a href="/quiz/{{quizid}}">{{quizname}}</a></td>
+    <td>12/23/2345</td> 
+    <td>12</td>
+    <td><img id="delete-button" src="/assets/delete-button.svg"></td>
+    </tr>
+{{/each}}
+</table>
