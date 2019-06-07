@@ -1,5 +1,11 @@
 <div class="nav-bar">
 <h1>Dashboard</h1>
+<br>
+<p>{{msg}}</p>
+ {{#each examples}}
+<p><a href="quiz/{{this.id}}">{{this.user}}</a></p>
+{{/each}}
+
 <a id="sign-out">Sign Out</a>
 </div>
 
@@ -7,6 +13,13 @@
 <div class="side-bar">
 <ul>
     <li>Test</li>
+    <ul id="example-list" class="list-group">
+          {{#each examples}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="quiz/{{this.id}}">{{this.id}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
 </ul>
 
 </div>
@@ -17,14 +30,16 @@
 <table>
      <tr>
     <th id="quiz-name">Quiz Name</th>
+    <th>User</th>
     <th>Date Created</th> 
     <th>Invitees</th>
     <th></th>
   </tr>
- {{#each quiz_name}}
+ {{#each examples}}
  <tr>
-  <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td>
-    <td>12/23/2345</td> 
+    <td><a href="quiz/{{this.id}}">{{this.quiz_name}}</a></td>
+    <td><a href="quiz/{{this.id}}">{{this.user}}</a></td> 
+    <td><a href="quiz/{{this.id}}">{{this.createdAt}}</a></td> 
     <td>12</td>
     <td><img id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>

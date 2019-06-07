@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
           len: [1]
         }
       },
-      user: DataTypes.JSON
+      user: DataTypes.STRING
     });
     return quizList;
   };

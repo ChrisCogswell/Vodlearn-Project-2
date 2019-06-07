@@ -18,7 +18,7 @@ app.set("view engine", "handlebars");
 
 var routes = require("./controllers/controller.js");
 var apiroutes=require("./routes/api-routes.js");
-require("./routes/quiz-routes.js")(app);
+require("./routes/html-routes.js")(app);
 
 
 app.use(routes);

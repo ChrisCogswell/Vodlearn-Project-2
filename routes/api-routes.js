@@ -76,7 +76,32 @@ router.post('/signup', (req,res)=>{
     
         });
 
+        
+    });
+    module.exports = router;
 
-});
+var db = require("../models");
 
-module.exports = router;
+module.exports = function(app) {
+  // Get all examples
+  app.get("/api/examples", function(req, res) {
+    db.Quiz_List.findAll({}).then(function(dbQuizList) {
+      res.json(dbQuizList);
+    });
+  });
+
+  // Create a new example
+  app.post("/api/examples", function(req, res) {
+    db.Quiz_List.create(req.body).then(function(dbQuizList) {
+      res.json(dbQuizList);
+    });
+  });
+
+  // Delete an example by id
+  app.delete("/api/examples/:id", function(req, res) {
+    db.Quiz_List.destroy({ where: { id: req.params.id } }).then(function(dbQuizList) {
+      res.json(dbQuizList);
+    });
+  });
+};
+
