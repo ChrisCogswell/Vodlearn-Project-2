@@ -1,14 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
-    var Quiz = sequelize.define("Quiz", {
-      question: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1]
-        }
-      },
-      question_type: DataTypes.STRING,
-      answer: DataTypes.INTEGER
-    });
-    return Quiz;
-  };
+  var Quiz = sequelize.define("Quiz", {
+    quiz_name: DataTypes.STRING,
+    question: DataTypes.TEXT,
+    choices: DataTypes.STRING,
+    correct_answer: DataTypes.STRING,
+    user: DataTypes.TEXT
+  });
+  return Quiz;
+};

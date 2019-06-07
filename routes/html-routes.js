@@ -20,11 +20,20 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/quizmaker", function(req, res) {
+    db.Quiz.findAll({}).then(function(dbQuiz) {
+      res.render("quiz", {
+        msg: "Welcome!",
+        examples: dbQuiz
+      });
+    });
+  });
+
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
-    db.Quiz_List.findOne({ where: { id: req.params.id } }).then(function(dbQuizList) {
-      res.render("quiz", {
-        example: dbQuizList
+    db.Quiz.findOne({ where: { id: req.params.id } }).then(function(dbQuiz) {
+      res.render("question", {
+        example: dbQuiz
       });
     });
   });
