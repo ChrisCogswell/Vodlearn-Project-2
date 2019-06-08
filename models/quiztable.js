@@ -3,9 +3,6 @@ module.exports = function(sequelize, DataTypes) {
       quiz_name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: [1]
-        }
       },
       user: DataTypes.STRING
     });

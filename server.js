@@ -17,13 +17,13 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-var routes = require("./controllers/controller.js");
+var htmlroutes = require("./routes/html-routes.js");
 var apiroutes=require("./routes/api-routes.js");
 var dashboardroutes =require("./routes/dashboard-routes.js");
 var loginroutes=require("./routes/login-routes.js");
 
 
-app.use(routes);
+app.use(htmlroutes);
 app.use(apiroutes);
 app.use(dashboardroutes);
 app.use(loginroutes);
