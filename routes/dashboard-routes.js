@@ -6,13 +6,7 @@ router.get("/dashboard/:username", isAuthenticated, function(req, res) {
     var userinfo={
         name:req.params.username
     }
-
     console.log("Dashboard");
-    // var quizinfo={
-    //     quizlist:[
-    //     {quizname:"Quiz 1" ,quizid:1},{quizname:"Quiz 2", quizid:2}
-    // ]};
-
     res.render("dashboard");
 });
 
