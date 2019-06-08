@@ -46,38 +46,33 @@ router.post('/signup', (req,res)=>{
     
     })
     
-    router.post('/login', (req,res)=>{
-        var authenticationData = {
-            Username : req.body.username,
-            Password : req.body.password,
-        };
-        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-        var poolData = { UserPoolId : 'us-east-2_vq6Vzx6C2',
-            ClientId : '5cq5r66nb5dqqgffau4g102hvo'
-        };
-        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-        var userData = {
-            Username : req.body.username,
-            Pool : userPool
-        };
-        var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-        cognitoUser.authenticateUser(authenticationDetails, {
-            onSuccess: function (result) {
-                var accessToken = result.getAccessToken().getJwtToken();
-                
-                /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer*/
-                var idToken = result.idToken.jwtToken;
-                res.redirect('/dashboard/'+cognitoUser.getUsername());
-            },
     
-            onFailure: function(err) {
-                console.log(err);
-            },
-    
-        });
+   
 
 
-});
+
+
+  // Get all examples
+  router.get("/api/examples", function(req, res) {
+    db.Quiz_List.findAll({}).then(function(dbQuizList) {
+      res.json(dbQuizList);
+    });
+  });
+
+  // Create a new example
+  router.post("/api/examples", function(req, res) {
+    db.Quiz_List.create(req.body).then(function(dbQuizList) {
+      res.json(dbQuizList);
+    });
+  });
+
+  // Delete an example by id
+  router.delete("/api/examples/:id", function(req, res) {
+    db.Quiz_List.destroy({ where: { id: req.params.id } }).then(function(dbQuizList) {
+      res.json(dbQuizList);
+    });
+  });
+
 
 
 
@@ -120,17 +115,10 @@ router.get("/addquiz", function(req, res) {
     res.render("dashboard-stage",{layout: false, view:"addquiz"});
 });
 
+
+
 module.exports = router;
 
 
 
-function isAuthenticated(req, res,next){
 
-if(cognitoUser.getUsername()=req.params){
-next();
-}
-else{
-    res.redirect("/")
-}
-
-}

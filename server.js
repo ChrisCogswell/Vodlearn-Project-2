@@ -19,16 +19,20 @@ app.set("view engine", "handlebars");
 
 var routes = require("./controllers/controller.js");
 var apiroutes=require("./routes/api-routes.js");
+var dashboardroutes =require("./routes/dashboard-routes.js");
+var loginroutes=require("./routes/login-routes.js");
+
 
 app.use(routes);
 app.use(apiroutes);
+app.use(dashboardroutes);
+app.use(loginroutes);
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
 });
-
 
 
 // 

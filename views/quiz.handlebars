@@ -1,10 +1,14 @@
 <h1>{{quizname}}</h1>
  <form>
-<ul>
-    {{#each questionlist}}
-    <li><p>{{question}}</p>
-    <input type="text"></li>
-    {{/each}}
+    <ul id="example-list" class="list-group">
+          {{#each examples}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="quiz/{{this.id}}">{{this.id}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
 </ul>
 <input type="submit">
 </form>
+
+		<script src="../assets/js/dashboard.js"></script>
