@@ -1,0 +1,28 @@
+<table>
+     <tr>
+    <th>Quiz Name</th>
+    <th>Date Created</th> 
+    <th>Invitees</th>
+    <th></th>
+  </tr>
+ {{#each quizlist}}
+ <tr>
+  <td><a href="/quiz/{{quizid}}">{{quiz_name}}</a></td>
+    <td>{{createdAt}}</td> 
+    <td></td>
+    <td><img id="delete-button" src="/assets/delete-button.svg"></td>
+    </tr>
+{{/each}}
+</table>
+<button onclick="addQuiz()" id="addquiz-button" class="dashboard-button">+Add Course</button>
+
+
+    <script>
+function addQuiz(){
+    console.log('Display Add Quiz');
+        $.get( '/addquiz', function( data ) {
+            $( '#display-stage' ).html( data );
+            // document.getElementById('display-stage').innerHTML=data;
+          });
+    }
+</script>

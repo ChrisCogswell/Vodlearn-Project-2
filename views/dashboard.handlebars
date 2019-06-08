@@ -1,50 +1,28 @@
 <div class="nav-bar">
 <h1>Dashboard</h1>
 <br>
-<p>{{msg}}</p>
+{{!-- <p>{{msg}}</p>
  {{#each examples}}
 <p ="quiz/{{this.id}}">{{this.user}}</p>
-{{/each}}
+{{/each}} --}}
 
 <a id="sign-out">Sign Out</a>
 </div>
 
 
 <div class="side-bar">
-<ul>
-    <li>Test</li>
-    <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="quiz/{{this.id}}">{{this.id}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
+<ul class="dash-list">
+    <li id="quizlist-button" class="dash-listitem"><a>My Courses</a></li>
+    <li id="settings-button" class="dash-listitem">Settings</li>
 </ul>
 
 </div>
 
 
 
-<div class="quiz-table">
-<table>
-     <tr>
-    <th id="quiz-name">Quiz Name</th>
-    <th>User</th>
-    <th>Date Created</th> 
-    <th>Invitees</th>
-    <th></th>
-  </tr>
- {{#each examples}}
- <tr>
-    <td><a href="quiz/{{this.id}}">{{this.quiz_name}}</a></td>
-    <td><p ="quiz/{{this.id}}">{{this.user}}</p></td> 
-    <td><p ="quiz/{{this.id}}">{{this.createdAt}}</p></td> 
-    <td>12</td>
-    <td><img id="delete-button" src="/assets/delete-button.svg"></td>
-    </tr>
-{{/each}}
-</table>
+<div id="display-stage">
+
+{{> settings/quizlist-block sleep=false}}
 </div>
 
-		<script src="../assets/js/dashboard.js"></script>
+
