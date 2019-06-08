@@ -7,20 +7,29 @@
         <h3>(Quiz Name)</h3>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
-            <label for="example-question">Question</label>
-            <input type="text" id="example-question" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+            <label for="quiz-category"><h4>Category:</h4></label><br>
+             <input type="radio" class="quiz-category" name="category" value="educational"> Educational<br>
+             <input type="radio" class="quiz-category" name="category" value="workplace"> Workplace<br>
+             <input type="radio" class="quiz-category" name="category" value="fun"> Fun<br>
+             <input type="radio" class="quiz-category" name="category" value="other"> Other
+            {{!-- <input type="text" id="quiz-category" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text"> --}}
           </div>
+          <br>
+          <br>
           <div class="form-group">
-            <label for="example-choices">Choices</label>
-            <textarea class="form-control" id="example-choices" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+            <label for="quiz-type"><h4>Quiz Type:</h4></label><br>
+             <input type="radio" class="quiz-type" name="quiztype" value="t/r" > True/False<br>
+             <input type="radio" class="quiz-type" name="quiztype" value="mc"> Multiple Choice<br>
+            {{!-- <textarea class="form-control" id="quiz-type" aria-describedby="quiz-description" placeholder="Enter Example Description"></textarea> --}}
           </div>
+          <br>
           <div class="form-group">
-            <label for="example-answer">Correct Answer</label>
-            <input type="text" id="example-answer" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+            <label for="quiz-description">Description</label>
+            <input type="text" id="quiz-description" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h3>Examples:</h3>
+        <h3>Quiz:</h3>
         <ul id="example-list" class="list-group">
           {{#each examples}}
           <li data-id="{{this.id}}" class="list-group-item">

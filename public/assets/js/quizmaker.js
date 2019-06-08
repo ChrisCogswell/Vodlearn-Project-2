@@ -1,7 +1,7 @@
 // Get references to page elements
-var $exampleQuestion = $("#example-question");
-var $exampleChoices = $("#example-choices");
-var $exampleAnswer= $("#example-answer");
+var $quizCategory = $(".quiz-category");
+var $quizType = $(".quiz-type");
+var $quizDescription= $("#quiz-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
@@ -36,7 +36,7 @@ var refreshExamples = function() {
   API.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
-        .text(example.question)
+        .text(example.category)
         .attr("href", "/example/" + example.id);
 
       var $li = $("<li>")
@@ -66,12 +66,12 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
-    question: $exampleQuestion.val().trim(),
-    choices: $exampleChoices.val().trim(),
-    correct_answer: $exampleAnswer.val().trim()
+    category: $quizCategory.val().trim(),
+    type: $quizType.val().trim(),
+    description: $quizDescription.val().trim()
   };
 
-  if (!(example.question && example.choices && example.correct_answer)) {
+  if (!(example.category && example.type && example.description)) {
     alert("You must enter an example text and description!");
     return;
   }
@@ -80,9 +80,9 @@ var handleFormSubmit = function(event) {
     refreshExamples();
   });
 
-  $exampleQuestion.val("");
-  $exampleChoices.val("");
-  $exampleAnswer.val("");
+  $quizCategory.val("");
+  $quizType.val("");
+  $quizDescription.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
