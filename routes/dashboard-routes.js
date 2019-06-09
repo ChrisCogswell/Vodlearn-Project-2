@@ -18,8 +18,8 @@ router.get("/settings", function(req, res) {
 });
 
 router.get("/quizlist", function(req, res) {
-    db.Quiz_List.findAll({}).then(function(dbQuizList) {
-        res.render("dashboard-stage",{layout: false, view:"quizlist", quizlist:dbQuizList});
+    db.Quiz.findAll({}).then(function(result) {
+        res.render("dashboard-stage",{layout: false, view:"quizlist", quizlist:result});
             });
       });
   

@@ -1,15 +1,93 @@
-<h1>Add Quiz</h1>
-<form>
-<label>Quiz Name:</label>
+<div class="container">
+   
+      
+        <h1>{{msg}}</h1>
+        <h1>Add Quiz</h1>
+        
+
+   
+
+          <label>Quiz Name:</label>
+          <input id="quiz-name" type="text"><br>
+          <div class="form-group">
+            <label for="quiz-category"><h4>Category:</h4></label><br>
+             <input type="radio" class="quiz-category" name="category" value="educational"> Educational<br>
+             <input type="radio" class="quiz-category" name="category" value="workplace"> Workplace<br>
+             <input type="radio" class="quiz-category" name="category" value="fun"> Fun<br>
+             <input type="radio" class="quiz-category" name="category" value="other"> Other
+            {{!-- <input type="text" id="quiz-category" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text"> --}}
+          </div>
+          <br>
+          <br>
+          <div class="form-group">
+            <label for="quiz-type"><h4>Quiz Type:</h4></label><br>
+             <input type="radio" class="quiz-type" name="quiztype" value="t/r" > True/False<br>
+             <input type="radio" class="quiz-type" name="quiztype" value="mc"> Multiple Choice<br>
+            {{!-- <textarea class="form-control" id="quiz-type" aria-describedby="quiz-description" placeholder="Enter Example Description"></textarea> --}}
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="quiz-description">Description</label>
+            <textarea name="message" rows="10" cols="30">Quiz Description</textarea>
+          </div>
+          <br>
+          <button id="add-quiz-button">Submit2</button>
+       
+      
+        <br>
+<button id="add-question-button">Add Question</button>
+<div id="question-list">
+
+<div class="questionmaker">
+    <label>Question Type:</label>
+     <input list="questiontype" name="questiontype">
+    <datalist id="questiontype">
+    <option value="True/False">
+    <option value="Multiple Choice">
+  </datalist>
+<br>
+<label>Question:</label>
 <input type="text">
+<br>
+<button>Add Question</button>
+</div>
 
-<table>
 
+</div>
+
+
+     
+  </div>
+</div>
+<script>
+$("#add-quiz-button").on("click", function(){
+  console.log("Create Quiz");
+   var newquiz={
+     quiz_name:$("#quiz-name").val()
+   }
+   console.log(newquiz.quiz_name);
+ $.post("/api/addquiz", newquiz, function() {
     
-</table>
+    });
+  
+// }); 
 
-<input type="submit">
-</form>
+});
 
+
+$("#add-question-button").on("click", function(){
+  console.log("Create Quiz");
+   var newquiz={
+     quiz_name:$("#quiz-name").val()
+   }
+   console.log(newquiz.quiz_name);
+ $.post("/api/addquestion", newquiz, function() {
+    
+    });
+  
+// }); 
+
+});
+</script>
 
 
