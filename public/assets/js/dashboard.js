@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+  $.get( "/quizlist", function( data ) {
+    $( "#display-stage" ).html( data );
+    // document.getElementById("display-stage").innerHTML=data;
+  });
 
     $("#addquiz-button").on("click", 
     function (){

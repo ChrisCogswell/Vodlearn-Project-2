@@ -339,3 +339,9 @@ font-size:15px;
     font-family: 'Open Sans', sans-serif;
     font-size:15px; 
 }
+
+.radio-button{
+border-width: 0;
+
+
+}
