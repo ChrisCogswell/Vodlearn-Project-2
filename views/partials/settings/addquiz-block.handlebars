@@ -1,16 +1,14 @@
-
-
 <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
+   
+      
         <h1>{{msg}}</h1>
         <h1>Add Quiz</h1>
         
 
-        <form class="clearfix mb-4" action="POST">
+   
 
           <label>Quiz Name:</label>
-          <input type="text" id="quiz-name" class="form-control" aria-describedby="example-text" placeholder="Enter Quiz Name"><br>
+          <input id="quiz-name" type="text"><br>
           <div class="form-group">
             <label for="quiz-category"><h4>Category:</h4></label><br>
              <input type="radio" class="quiz-category" name="category" value="educational"> Educational<br>
@@ -30,26 +28,66 @@
           <br>
           <div class="form-group">
             <label for="quiz-description">Description</label>
-            <input type="text" id="quiz-description" class="form-control" aria-describedby="example-text" placeholder="Enter Quiz Description">
+            <textarea name="message" rows="10" cols="30">Quiz Description</textarea>
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Quiz:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.question}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
+          <br>
+          <button id="add-quiz-button">Submit2</button>
+       
+      
+        <br>
+<button id="add-question-button">Add Question</button>
+<div id="question-list">
+
+<div class="questionmaker">
+    <label>Question Type:</label>
+     <input list="questiontype" name="questiontype">
+    <datalist id="questiontype">
+    <option value="True/False">
+    <option value="Multiple Choice">
+  </datalist>
+<br>
+<label>Question:</label>
+<input type="text">
+<br>
+<button>Add Question</button>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../assets/js/quizmaker.js"></script>
 
+</div>
+
+
+     
+  </div>
+</div>
+<script>
+$("#add-quiz-button").on("click", function(){
+  console.log("Create Quiz");
+   var newquiz={
+     quiz_name:$("#quiz-name").val()
+   }
+   console.log(newquiz.quiz_name);
+ $.post("/api/addquiz", newquiz, function() {
+    
+    });
+  
+// }); 
+
+});
+
+
+$("#add-question-button").on("click", function(){
+  console.log("Create Quiz");
+   var newquiz={
+     quiz_name:$("#quiz-name").val()
+   }
+   console.log(newquiz.quiz_name);
+ $.post("/api/addquestion", newquiz, function() {
+    
+    });
+  
+// }); 
+
+});
+</script>
 
 
