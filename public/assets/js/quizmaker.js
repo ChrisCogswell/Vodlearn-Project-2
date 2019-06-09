@@ -1,4 +1,5 @@
 // Get references to page elements
+var $quizName = $("#quiz-name");
 var $quizCategory = $(".quiz-category");
 var $quizType = $(".quiz-type");
 var $quizDescription= $("#quiz-description");
@@ -36,7 +37,7 @@ var refreshExamples = function() {
   API.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
-        .text(example.category)
+        .text(example.quiz_name)
         .attr("href", "/example/" + example.id);
 
       var $li = $("<li>")
@@ -66,13 +67,14 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
+    quiz_name: $quizName.val().trim(),  
     category: $quizCategory.val().trim(),
     type: $quizType.val().trim(),
     description: $quizDescription.val().trim()
   };
 
-  if (!(example.category && example.type && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(example.quiz_name && example.category && example.type && example.description)) {
+    alert("You must enter field info!");
     return;
   }
 
@@ -80,6 +82,7 @@ var handleFormSubmit = function(event) {
     refreshExamples();
   });
 
+  $quizName.val("");
   $quizCategory.val("");
   $quizType.val("");
   $quizDescription.val("");
