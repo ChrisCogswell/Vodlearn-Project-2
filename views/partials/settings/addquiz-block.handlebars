@@ -1,9 +1,9 @@
 <div class="container">
    
       
-        <h1>{{msg}}</h1>
+      
         <h1>Add Quiz</h1>
-        
+          <h1>{{quiz_name}}</h1>
 
    
 
@@ -70,7 +70,10 @@
 </div>
 <script>
 
-var optionsarray=[];  
+var question_array=[];  
+
+$("#quiz-name").val("{{quiz_name}}");
+
 
 $("#add-choice-button").on("click", function(){
     var newoption="<label>Option #"+(optionsarray.length+1)+"</label><input type='text'><br>"
