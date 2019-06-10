@@ -1,15 +1,50 @@
-<h1>Add Quiz</h1>
-<form>
-<label>Quiz Name:</label>
-<input type="text">
+<div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>{{msg}}</h1>
+        <h1>Add Quiz</h1>
 
-<table>
 
-    
-</table>
+        <form class="clearfix mb-4" action="POST">
 
-<input type="submit">
-</form>
+          <label>Quiz Name:</label>
+          <input type="text"><br>
+          <div class="form-group">
+            <label for="quiz-category"><h4>Category:</h4></label><br>
+             <input type="radio" class="quiz-category" name="category" value="educational"> Educational<br>
+             <input type="radio" class="quiz-category" name="category" value="workplace"> Workplace<br>
+             <input type="radio" class="quiz-category" name="category" value="fun"> Fun<br>
+             <input type="radio" class="quiz-category" name="category" value="other"> Other
+            {{!-- <input type="text" id="quiz-category" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text"> --}}
+          </div>
+          <br>
+          <br>
+          <div class="form-group">
+            <label for="quiz-type"><h4>Quiz Type:</h4></label><br>
+             <input type="radio" class="quiz-type" name="quiztype" value="t/r" > True/False<br>
+             <input type="radio" class="quiz-type" name="quiztype" value="mc"> Multiple Choice<br>
+            {{!-- <textarea class="form-control" id="quiz-type" aria-describedby="quiz-description" placeholder="Enter Example Description"></textarea> --}}
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="quiz-description">Description</label>
+            <input type="text" id="quiz-description" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+          </div>
+          <button id="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
+        <h3>Quiz:</h3>
+        <ul id="example-list" class="list-group">
+          {{#each examples}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="example/{{this.id}}">{{this.question}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
