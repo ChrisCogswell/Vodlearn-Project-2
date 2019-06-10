@@ -3,17 +3,18 @@
     <div class="col-8 offset-2">
       <div class="card mt-4">
         <div class="card-body">
-          <h5 class="card-title">Example</h5>
+          {{#each quizlist}}
           <p>
-            <strong>ID</strong>: {{example.id}}</p>
+            <strong>ID</strong>: {{id}}</p>
           <p>
           <p>
-            <strong>Question</strong>: {{example.question}}</p>
+            <strong>Quiz Name</strong>: {{quiz_name}}</p>
           <p>
             <strong>Choices:</strong> {{example.choices}}</p>
           <p>
             <strong>Correct Answer:</strong> {{example.correct_answer}}</p>
             <a href="/">← Back To Home</a>
+          {{/each}}  
         </div>
       </div>
     </div>
