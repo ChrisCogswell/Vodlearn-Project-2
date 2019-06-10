@@ -6,26 +6,44 @@
     <th></th>
   </tr>
  {{#each quizlist}}
- <tr>
-  <td><a  data-quizid={{id}}  onclick="addQuiz({{id}})">{{quiz_name}}</a></td>
+ <tr id={{id}}>
+  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
     <td>{{createdAt}}</td> 
     <td></td>
-    <td><img id="delete-button" src="/assets/delete-button.svg"></td>
+    <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
 </table>
-<button onclick="addQuiz(-1)" id="addquiz-button" class="dashboard-button">+Add Course</button>
+<button onclick="addQuiz()" id="addquiz-button" class="dashboard-button">+Add Course</button>
 
 
     <script>
 
-function addQuiz(id){
+function updateQuiz(id){
     console.log('Display Add Quiz');
-    if(id==-1){
-        id=null;
-    }
         $.get( '/addquiz/'+id, function( data ) {
             $( '#display-stage' ).html( data );
           });
     }
+
+function addQuiz(){
+    console.log('Display Add Quiz');
+        $.get( '/addquiz/', function( data ) {
+            $( '#display-stage' ).html( data );
+          });
+    }
+
+function deleteQuiz(id){
+console.log("Deleteing Quiz "+id);
+$.ajax({
+    url: '/api/delete/'+id,
+    type: 'DELETE',
+    success: function(result) {
+        $("#"+id).remove();
+    }
+});
+
+}
+
+
 </script>
