@@ -19,7 +19,7 @@ var db = require("../models");
   });
 
   // Delete an example by id
-  router.delete("/api/examples/:id", function(req, res) {
+  router.delete("/api/delete/:id", function(req, res) {
     db.Quiz.destroy({ where: { id: req.params.id } }).then(function(dbQuizList) {
       res.json(dbQuizList);
     });

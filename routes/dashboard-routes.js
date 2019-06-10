@@ -35,6 +35,16 @@ router.get("/addquiz", function(req, res) {
     res.render("dashboard-stage",{layout: false, view:"addquiz"});
 });
 
+router.get("/addquiz/:id", function(req, res) {
+    db.Quiz.findOne({where:{
+        id: req.params.id
+    }}).then(function(result){
+        console.log(result);
+       res.render("dashboard-stage",{layout: false, view:"addquiz", quiz_name: result.quiz_name}); 
+    })
+    
+});
+
 module.exports = router;
 
 //TODO add authentication token check

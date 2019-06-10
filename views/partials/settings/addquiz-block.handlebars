@@ -1,9 +1,9 @@
 <div class="container">
    
       
-        <h1>{{msg}}</h1>
+      
         <h1>Add Quiz</h1>
-        
+          <h1>{{quiz_name}}</h1>
 
    
 
@@ -11,10 +11,10 @@
           <input id="quiz-name" type="text"><br>
           <div class="form-group">
             <label for="quiz-category"><h4>Category:</h4></label><br>
-             <input type="radio" class="quiz-category" name="category" value="educational"> Educational<br>
-             <input type="radio" class="quiz-category" name="category" value="workplace"> Workplace<br>
-             <input type="radio" class="quiz-category" name="category" value="fun"> Fun<br>
-             <input type="radio" class="quiz-category" name="category" value="other"> Other
+             <input type="radio" class="quiz-category radio-button" name="category" value="educational"> Educational<br>
+             <input type="radio" class="quiz-category radio-button" name="category" value="workplace"> Workplace<br>
+             <input type="radio" class="quiz-category radio-button" name="category" value="fun"> Fun<br>
+             <input type="radio" class="quiz-category radio-button" name="category" value="other"> Other
             {{!-- <input type="text" id="quiz-category" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text"> --}}
           </div>
           <br>
@@ -31,11 +31,11 @@
             <textarea name="message" rows="5" cols="30" id="quiz-description">Quiz Description</textarea>
           </div>
           <br>
-          <button id="add-quiz-button">Submit</button>
-       
+          <button id="add-quiz-button" class="dashboard-button">Create Quiz</button>
+          
       
         <br>
-<button id="add-question-button">Add Question</button>
+
 <div id="question-list">
 
 <div class="questionmaker">
@@ -46,20 +46,43 @@
     <option value="Multiple Choice">
   </datalist>
 <br>
+
 <label>Question:</label>
 <input type="text">
 <br>
-<button>Add Question</button>
+
+<div class="choice-box">
+<label>Option #1</label><input id="option-1" type="text"><button id="add-choice-button">+</button>
+<br>
+<label>Option #2</label><input id="option-2" type="text"><button id="add-choice-button">+</button>
+</div>
+
+<br>
+<button>Save</button>
 </div>
 
 
 </div>
-
+<button id="add-question-button" class="dashboard-button">+ Question</button>
 
      
   </div>
 </div>
 <script>
+
+var question_array=[];  
+
+$("#quiz-name").val("{{quiz_name}}");
+
+
+$("#add-choice-button").on("click", function(){
+    var newoption="<label>Option #"+(optionsarray.length+1)+"</label><input type='text'><br>"
+    optionsarray.push(newoption);
+    $(".choice-box").append(optionsarray[optionsarray.length-1]);
+
+    
+})
+
 $("#add-quiz-button").on("click", function(){
   console.log("Create Quiz");
    var newquiz={
@@ -73,23 +96,13 @@ $("#add-quiz-button").on("click", function(){
     
     });
   
-// }); 
-
 });
 
 
 $("#add-question-button").on("click", function(){
-  console.log("Create Quiz");
-   var newquiz={
-     quiz_name:$("#quiz-name").val()
-   }
-   console.log(newquiz.quiz_name);
- $.post("/api/addquestion", newquiz, function() {
-    
-    });
+    console.log("appending");
+$("#question-list").append("<div class='questionmaker'><label>Question Type:</label><input list='questiontype' name='questiontype'><datalist id='questiontype'><option value='True/False'><option value='Multiple Choice'></datalist><br><label>Question:</label><input type='text'><br><label>Option #1</label><input type='text'><button>+</button><br><button>Add Question</button></div>");
   
-// }); 
-
 });
 </script>
 
