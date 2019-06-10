@@ -13,7 +13,7 @@ var db = require("../models");
 
   // Create a new example
   router.post("/api/addquiz", function(req, res) {
-    db.Quiz.create({quiz_name:req.body.quiz_name}).then(function(results) {
+    db.Quiz.create({quiz_name:req.body.quiz_name, category:req.body.category, type:req.body.type, description:req.body.description}).then(function(results) {
       res.json(results);
     });
   });

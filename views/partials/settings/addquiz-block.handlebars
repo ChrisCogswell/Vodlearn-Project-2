@@ -27,11 +27,11 @@
           </div>
           <br>
           <div class="form-group">
-            <label for="quiz-description">Description</label>
-            <textarea name="message" rows="10" cols="30">Quiz Description</textarea>
+            <label for="quiz-description">Description</label><br>
+            <textarea name="message" rows="5" cols="30" id="quiz-description">Quiz Description</textarea>
           </div>
           <br>
-          <button id="add-quiz-button">Submit2</button>
+          <button id="add-quiz-button">Submit</button>
        
       
         <br>
@@ -63,7 +63,10 @@
 $("#add-quiz-button").on("click", function(){
   console.log("Create Quiz");
    var newquiz={
-     quiz_name:$("#quiz-name").val()
+     quiz_name:$("#quiz-name").val(),
+     category:$(".quiz-category").val(),
+     type:$(".quiz-type").val(),
+     description:$("#quiz-description").val()
    }
    console.log(newquiz.quiz_name);
  $.post("/api/addquiz", newquiz, function() {
