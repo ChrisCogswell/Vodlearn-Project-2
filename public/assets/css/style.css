@@ -324,5 +324,24 @@ tr:nth-child(even) {
     background-color: #dddddd;
   }
 
+.questionmaker{
+background-color: white;
+width: 100%;
+position: relative;
+margin: 10px;
+padding: 5px;
+border-radius: 10px;
+font-family: 'Open Sans', sans-serif;
+font-size:15px;
+}
+
+.questionmaker input{
+    font-family: 'Open Sans', sans-serif;
+    font-size:15px; 
+}
+
+.radio-button{
+border-width: 0;
 
 
+}

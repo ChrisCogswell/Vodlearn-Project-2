@@ -6,11 +6,11 @@
     <th></th>
   </tr>
  {{#each quizlist}}
- <tr>
-  <td><a href="/quiz/{{quizid}}">{{quiz_name}}</a></td>
+ <tr id={{id}}>
+  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
     <td>{{createdAt}}</td> 
     <td></td>
-    <td><img id="delete-button" src="/assets/delete-button.svg"></td>
+    <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
 </table>
@@ -18,11 +18,32 @@
 
 
     <script>
-function addQuiz(){
+
+function updateQuiz(id){
     console.log('Display Add Quiz');
-        $.get( '/addquiz', function( data ) {
+        $.get( '/addquiz/'+id, function( data ) {
             $( '#display-stage' ).html( data );
-            // document.getElementById('display-stage').innerHTML=data;
           });
     }
+
+function addQuiz(){
+    console.log('Display Add Quiz');
+        $.get( '/addquiz/', function( data ) {
+            $( '#display-stage' ).html( data );
+          });
+    }
+
+function deleteQuiz(id){
+console.log("Deleteing Quiz "+id);
+$.ajax({
+    url: '/api/delete/'+id,
+    type: 'DELETE',
+    success: function(result) {
+        $("#"+id).remove();
+    }
+});
+
+}
+
+
 </script>

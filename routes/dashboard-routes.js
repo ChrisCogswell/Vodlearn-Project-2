@@ -21,13 +21,23 @@ router.get("/settings", function(req, res) {
 });
 
 router.get("/quizlist", function(req, res) {
-    db.Quiz_List.findAll({}).then(function(dbQuizList) {
-        res.render("dashboard-stage",{layout: false, view:"quizlist", quizlist:dbQuizList});
+    db.Quiz.findAll({}).then(function(result) {
+        res.render("dashboard-stage",{layout: false, view:"quizlist", quizlist:result});
             });
       });
   
 router.get("/addquiz", function(req, res) {
     res.render("dashboard-stage",{layout: false, view:"addquiz"});
+});
+
+router.get("/addquiz/:id", function(req, res) {
+    db.Quiz.findOne({where:{
+        id: req.params.id
+    }}).then(function(result){
+        console.log(result);
+       res.render("dashboard-stage",{layout: false, view:"addquiz", quiz_name: result.quiz_name}); 
+    })
+    
 });
 
 module.exports = router;
