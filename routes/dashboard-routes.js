@@ -26,7 +26,7 @@ router.get("/quizlist", function(req, res) {
 
 router.get("/quiz/:id", function(req, res) {
   db.Quiz.findAll({}).then(function(result) {
-      res.render("dashboard-stage",{layout: false, view:"question", quizlist:result});
+      res.render("dashboard-stage",{layout: false, view:"quizview", quizlist:result});
           });
     });      
  

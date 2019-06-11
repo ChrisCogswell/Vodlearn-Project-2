@@ -19,15 +19,10 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// var routes = require("./controllers/controller.js");
-// var apiroutes=require("./routes/api-routes.js");
-// require("./routes/html-routes.js")(app);
-// require("./routes/api-routes")(app);
 
 
 
-// app.use(routes);
-// app.use(apiroutes);
+
 var htmlroutes = require("./routes/html-routes.js");
 var apiroutes=require("./routes/api-routes.js");
 var dashboardroutes =require("./routes/dashboard-routes.js");

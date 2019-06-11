@@ -1,0 +1,21 @@
+<h1>This will show the quiz</h1>
+
+<table>
+     <tr>
+    <th>Quiz Name</th>
+    <th>Date Created</th> 
+    <th>Invitees</th>
+    <th></th>
+  </tr>
+ {{#each question}}
+ {{!-- <tr>
+  <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td> --}}
+ <tr id={{id}}>
+  <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})"
+   >{{question_name}}</a></td>
+    <td>{{createdAt}}</td> 
+    {{!-- <td><a href="/quiz/{{id}}">{{type}}</a></td> --}}
+    <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
+    </tr>
+{{/each}}
+</table>

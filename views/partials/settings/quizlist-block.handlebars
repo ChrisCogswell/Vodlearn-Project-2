@@ -6,10 +6,13 @@
     <th></th>
   </tr>
  {{#each quizlist}}
+ {{!-- <tr>
+  <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td> --}}
  <tr id={{id}}>
-  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
+  <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})"
+   >{{quiz_name}}</a></td>
     <td>{{createdAt}}</td> 
-    <td></td>
+    {{!-- <td><a href="/quiz/{{id}}">{{type}}</a></td> --}}
     <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
