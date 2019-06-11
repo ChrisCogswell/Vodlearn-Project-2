@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      question_name: DataTypes.STRING,
+      question: DataTypes.STRING,
       answer: DataTypes.INTEGER
     });
 

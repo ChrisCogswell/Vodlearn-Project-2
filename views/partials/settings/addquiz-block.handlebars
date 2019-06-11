@@ -25,7 +25,7 @@
     <textarea name="message" rows="10" cols="30">Quiz Description</textarea>
   </div>
   <br>
-  <button id="add-quiz-button" class="dashboard-button">Create Quiz</button>
+  <button id="save-quiz-button" class="dashboard-button">Save Quiz</button>
 
 
   <br>
@@ -96,10 +96,11 @@
     $(".choice-box").append(optionsarray[optionsarray.length - 1]);
   })
 
-  $("#add-quiz-button").on("click", function () {
+  $("#save-quiz-button").on("click", function () {
     console.log("Create Quiz");
     var newquiz = {
-      quiz_name: $("#quiz-name").val()
+      quiz_name: $("#quiz-name").val(),
+      questions:question_array
     }
     console.log(newquiz.quiz_name);
     $.post("/api/addquiz", newquiz, function () {
@@ -116,9 +117,9 @@
       question:$("#question-input").val(),
       choices:optionsarray
     }
-
+    
     addQuestion(question);
-
+    optionsarray=[];
   });
 
   function addQuestion(formdata){
@@ -131,8 +132,5 @@
     $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
 
   }
-
-
-
 
 </script>

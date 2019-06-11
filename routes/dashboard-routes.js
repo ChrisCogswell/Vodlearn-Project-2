@@ -4,7 +4,6 @@ var db = require("../models");
 var region="us-east-2";
 var requestify=require("requestify");
 
-
 router.get("/dashboard/:username", function(req, res) {
     var userinfo={
         name:req.params.usernam
