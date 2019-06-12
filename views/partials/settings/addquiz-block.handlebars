@@ -1,106 +1,133 @@
 <div class="container">
-   
-      
-      
-        <h1>Add Quiz</h1>
-          <h1>{{quiz_name}}</h1>
 
-   
 
-          <label>Quiz Name:</label>
-          <input id="quiz-name" type="text"><br>
-          <div class="form-group">
-            <label for="quiz-category"><h4>Category:</h4></label><br>
-             <input type="radio" class="quiz-category radio-button" name="category" value="educational"> Educational<br>
-             <input type="radio" class="quiz-category radio-button" name="category" value="workplace"> Workplace<br>
-             <input type="radio" class="quiz-category radio-button" name="category" value="fun"> Fun<br>
-             <input type="radio" class="quiz-category radio-button" name="category" value="other"> Other
-            {{!-- <input type="text" id="quiz-category" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text"> --}}
-          </div>
-          <br>
-          <br>
-          <div class="form-group">
-            <label for="quiz-type"><h4>Quiz Type:</h4></label><br>
-             <input type="radio" class="quiz-type" name="quiztype" value="t/r" > True/False<br>
-             <input type="radio" class="quiz-type" name="quiztype" value="mc"> Multiple Choice<br>
-            {{!-- <textarea class="form-control" id="quiz-type" aria-describedby="quiz-description" placeholder="Enter Example Description"></textarea> --}}
-          </div>
-          <br>
-          <div class="form-group">
-            <label for="quiz-description">Description</label>
-            <textarea name="message" rows="10" cols="30">Quiz Description</textarea>
-          </div>
-          <br>
-          <button id="add-quiz-button" class="dashboard-button">Create Quiz</button>
-          
-      
+
+  <h1>Add Quiz</h1>
+  <h1>{{quiz_name}}</h1>
+
+
+
+  <label>Quiz Name:</label>
+  <input id="quiz-name" type="text"><br>
+
+  <br>
+
+  <br>
+  <button id="save-quiz-button" class="dashboard-button">Save Quiz</button>
+
+
+  <br>
+
+<div>
+  <table id="question-table">
+   <tr>
+    <th>Question #</th>
+    <th>Question Type</th>
+    <th>Question</th>
+    <th># Choices</th>
+</tr> 
+
+  </table>
+</div>
+
+
+  <div id="question-list">
+
+    <div class="questionmaker">
+      <label>Question Type:</label>
+      <input list="questiontype" name="questiontype">
+      <datalist id="questiontype">
+        <option value="True/False">
+        <option value="Multiple Choice">
+      </datalist>
+      <br>
+
+      <label>Question:</label>
+      <input id="question-input" type="text">
+      <br>
+
+      <div class="choice-box">
+        {{!-- <label>Option #1</label><input id="option-1" type="text">
         <br>
-
-<div id="question-list">
-
-<div class="questionmaker">
-    <label>Question Type:</label>
-     <input list="questiontype" name="questiontype">
-    <datalist id="questiontype">
-    <option value="True/False">
-    <option value="Multiple Choice">
-  </datalist>
-<br>
-
-<label>Question:</label>
-<input type="text">
-<br>
-
-<div class="choice-box">
-<label>Option #1</label><input id="option-1" type="text"><button id="add-choice-button">+</button>
-<br>
-<label>Option #2</label><input id="option-2" type="text"><button id="add-choice-button">+</button>
-</div>
-
-<br>
-<button>Save</button>
-</div>
+        <label>Option #2</label><input id="option-2" type="text">
+        <br> --}}
+        
+      </div>
+    <img id="add-choice-button" src="/assets/plus-button.svg">
+      <br>
+      <button id="add-question-button">Save Question</button>
+    </div>
 
 
-</div>
-<button id="add-question-button" class="dashboard-button">+ Question</button>
-
-     
   </div>
+  {{!-- <button id="add-question-button" class="dashboard-button">+ Question</button> --}}
+
+
 </div>
+</div>
+
 <script>
 
-var question_array=[];  
+  var question_array = [];
+  var optionsarray=[];
+ 
 
-$("#quiz-name").val("{{quiz_name}}");
 
+  $("#quiz-name").val("{{quiz_name}}");
 
-$("#add-choice-button").on("click", function(){
-    var newoption="<label>Option #"+(optionsarray.length+1)+"</label><input type='text'><br>"
+  $("#add-choice-button").on("click", function () {
+    var newoption = "<label>Option #" + (optionsarray.length + 1) + "</label><input type='text'><br>"
     optionsarray.push(newoption);
-    $(".choice-box").append(optionsarray[optionsarray.length-1]);
-
-    
-})
-
-$("#add-quiz-button").on("click", function(){
-  console.log("Create Quiz");
-   var newquiz={
-     quiz_name:$("#quiz-name").val()
-   }
-   console.log(newquiz.quiz_name);
- $.post("/api/addquiz", newquiz, function() {
-    
+    question_array.push({
+      question_type:"multiple_choice",
+      question:"How Many is a Dozen?",
+      choices:["12","13","14","15"]
     });
+    $(".choice-box").append(optionsarray[optionsarray.length - 1]);
+  })
+
+  $("#save-quiz-button").on("click", function () {
+    var newquiz = {
+      quiz_name: $("#quiz-name").val(),
+      questions:question_array
+    }
+
+    $.post("/api/addquiz", newquiz, function () {
+
+    });
+
+  });
+
+
+  $("#add-question-button").on("click", function () {
+    var question={
+      question_type:"MC",
+      question:$("#question-input").val(),
+      choices:optionsarray,
+      QuizId:1
+    }
   
+    addQuestion(question);
+    optionsarray=[];
+  });
+
+  function addQuestion(formdata){
+    question_array.push(formdata);
+    var questionid=question_array.length;
+    var question=formdata.question;
+    var choicenumber=formdata.choices.length;
+    var questiontype=formdata.question_type;
+
+    $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
+
+  }
+
+function getQuestions(){
+$.get("/api/addquiz/questions/{{id}}",function(results){
+console.log(results)
+addQuestion(results[0]);
 });
 
 
-$("#add-question-button").on("click", function(){
-    console.log("appending");
-$("#question-list").append("<div class='questionmaker'><label>Question Type:</label><input list='questiontype' name='questiontype'><datalist id='questiontype'><option value='True/False'><option value='Multiple Choice'></datalist><br><label>Question:</label><input type='text'><br><label>Option #1</label><input type='text'><button>+</button><br><button>Add Question</button></div>");
-  
-});
+}
 </script>
-
-

@@ -14,7 +14,13 @@ var db = require("../models");
   // Create a new example
   router.post("/api/addquiz", function(req, res) {
     db.Quiz.create({quiz_name:req.body.quiz_name}).then(function(results) {
-      res.json(results);
+      console.log("Success");
+      console.log(req.body.questions);
+      console.log(results);
+      req.body.questions.forEach(function(element){
+        element.QuizId=results.id;
+      });
+       db.Question.bulkCreate(req.body.questions);
     });
   });
 
@@ -31,6 +37,12 @@ var db = require("../models");
       db.Question.create({question_name:req.body.question_name}).then(function(results) {
         res.json(results);
       });
+    });
+
+    router.get("/api/addquiz/questions/:id",function(){
+      db.Question.findAll({where:{QuizId:req.params.id}}).then(function(results){
+        res.json(results);
+      })
     });
 
 module.exports = router;

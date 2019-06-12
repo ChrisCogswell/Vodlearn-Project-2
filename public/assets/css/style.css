@@ -342,6 +342,17 @@ font-size:15px;
 
 .radio-button{
 border-width: 0;
+}
 
-
+#quiz-name{
+    font-size: 20px;
+    background-color: inherit;
+    color:rgb(0, 70, 136);
+    border-width: 0 0 1px 0;
+    border-color: white;
+    border-style: solid;
+}
+#add-choice-button{
+    max-width: 20px;
+    max-height: auto;
 }
