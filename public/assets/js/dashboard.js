@@ -37,9 +37,9 @@ console.log("Display Quizes");
 
 } );
 
-$("#add-quiz-button").on("click", function(){
-  console.log("Create Quiz");
+// $("#add-quiz-button").on("click", function(){
+//   console.log("Create Quiz");
 
-});
+// });
 
 
