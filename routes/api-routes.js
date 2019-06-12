@@ -15,7 +15,14 @@ var db = require("../models");
   router.post("/api/addquiz", function(req, res) {
     db.Quiz.create({quiz_name:req.body.quiz_name}).then(function(results) {
       console.log("Success");
-      db.Question.create(req.questions[0]);
+      console.log(req.body.questions);
+      console.log(results);
+      req.body.questions.forEach(function(element){
+        element.QuizId=results.id;
+      });
+
+
+       db.Question.bulkCreate(req.body.questions);
     });
   });
 

@@ -98,6 +98,7 @@
 
   $("#save-quiz-button").on("click", function () {
     console.log("Create Quiz");
+    console.log("Question Array "+question_array[0].question);
     var newquiz = {
       quiz_name: $("#quiz-name").val(),
       questions:question_array
@@ -115,7 +116,8 @@
     var question={
       question_type:"MC",
       question:$("#question-input").val(),
-      choices:optionsarray
+      choices:optionsarray,
+      QuizId:1
     }
     
     addQuestion(question);
