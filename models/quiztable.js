@@ -4,28 +4,13 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-
-      user: DataTypes.STRING
+      owner: DataTypes.STRING
     });
-
+    
   Quiz.associate = function(models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
-    Quiz.hasMany(models.Question, {
-      onDelete: "cascade"
-    });
+    Quiz.hasMany(models.Question);
   };  
   
   

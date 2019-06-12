@@ -1,10 +1,12 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models");
+var region="us-east-2";
+var requestify=require("requestify");
 
-router.get("/dashboard/:username", isAuthenticated, function(req, res) {
+router.get("/dashboard/:username", function(req, res) {
     var userinfo={
-        name:req.params.username
+        name:req.params.usernam
     }
     console.log("Dashboard");
     res.render("dashboard");
@@ -55,13 +57,28 @@ router.get("/addquiz/:id", function(req, res) {
 module.exports = router;
 
 //TODO add authentication token check
-function isAuthenticated(req, res,next){
+function isAuthenticated(req,res,next){
+
+var jwt = require('jsonwebtoken');
+var jwkToPem = require('jwk-to-pem');
+var pem = getPem();
+jwt.verify(sessionStorage.getItem("idToken"), pem, { algorithms: ['RS256'] }, function(err, decodedToken) {
+}).then(function(result){
     console.log("Checking Authentication");
-        if(true){
-        next();
+    console.log(result);
+    next();
+}); 
+
         }
-        else{
-            res.redirect("/")
-        }
-        
-        }
+
+
+        function getPem() {
+            var userPoolId = 'us-east-2_vq6Vzx6C2'
+            const jwkUrl = `https://cognito-idp.${region}.amazonaws.com/${userPoolId}/.well-known/jwks.json`;
+          
+            return requestify.request(jwkUrl, { method: 'get', dataType: 'json'})
+              .then(res => res.getBody()['keys'].shift())
+              .then(jwk => jwkToPem(jwk))
+            ;
+          }
+

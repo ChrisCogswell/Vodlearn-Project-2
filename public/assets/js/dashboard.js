@@ -22,8 +22,8 @@ console.log("Display Settings");
         $( "#display-stage" ).html( data );
         // document.getElementById("display-stage").innerHTML=data;
       });
-}
-);
+    }
+    );
 
 $("#quizlist-button").on("click", 
 function (){
@@ -39,20 +39,7 @@ console.log("Display Quizes");
 
 $("#add-quiz-button").on("click", function(){
   console.log("Create Quiz");
-  // var newquiz={
-  //   quiz_name:$("#quiz_name").value()
-  // }
-
-  
-// }); 
 
 });
 
-//  $.ajax({
-//     url: '/api/addquiz',
-//     type: 'post',
-//     dataType: 'json',
-//     data: newquiz,
-//     success: function(data) {
-//                console.log("success")
-//              }
+
