@@ -13,10 +13,6 @@ var db = require("../models");
 
   // Create a new quiz
   router.post("/api/addquiz", function(req, res) {
-<<<<<<< HEAD
-    db.Quiz.create({quiz_name:req.body.quiz_name, category:req.body.category, type:req.body.type, description:req.body.description}).then(function(results) {
-      res.json(results);
-=======
     db.Quiz.create({quiz_name:req.body.quiz_name}).then(function(results) {
       console.log("Success");
       console.log(req.body.questions);
@@ -25,7 +21,6 @@ var db = require("../models");
         element.QuizId=results.id;
       });
        db.Question.bulkCreate(req.body.questions);
->>>>>>> 491b220727571bf5a61024fbc916033d21d9a324
     });
   });
 
