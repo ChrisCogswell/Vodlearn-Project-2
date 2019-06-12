@@ -24,7 +24,7 @@ var db = require("../models");
     });
   });
 
-  // Delete an example by id
+  // Delete a quiz by id
   router.delete("/api/delete/:id", function(req, res) {
     db.Quiz.destroy({ where: { id: req.params.id } }).then(function(dbQuizList) {
       res.json(dbQuizList);
@@ -32,7 +32,7 @@ var db = require("../models");
   });
 
 
-    // Create a new example
+    // Create a new question
     router.post("/api/addquestion", function(req, res) {
       db.Question.create({question_name:req.body.question_name, question_type:req.body.question_type, answer:req.body.answer}).then(function(results) {
         res.json(results);
