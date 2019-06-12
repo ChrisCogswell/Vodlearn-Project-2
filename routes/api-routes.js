@@ -20,8 +20,6 @@ var db = require("../models");
       req.body.questions.forEach(function(element){
         element.QuizId=results.id;
       });
-
-
        db.Question.bulkCreate(req.body.questions);
     });
   });
@@ -39,6 +37,12 @@ var db = require("../models");
       db.Question.create({question_name:req.body.question_name}).then(function(results) {
         res.json(results);
       });
+    });
+
+    router.get("/api/addquiz/questions/:id",function(){
+      db.Question.findAll({where:{QuizId:req.params.id}}).then(function(results){
+        res.json(results);
+      })
     });
 
 module.exports = router;

@@ -9,21 +9,9 @@
 
   <label>Quiz Name:</label>
   <input id="quiz-name" type="text"><br>
-  <div class="form-group">
-    <label for="quiz-category">
-      <h4>Category:</h4>
-    </label><br>
-    <input type="radio" class="quiz-category radio-button" name="category" value="educational"> Educational<br>
-    <input type="radio" class="quiz-category radio-button" name="category" value="workplace"> Workplace<br>
-    <input type="radio" class="quiz-category radio-button" name="category" value="fun"> Fun<br>
-    <input type="radio" class="quiz-category radio-button" name="category" value="other"> Other
-    {{!-- <input type="text" id="quiz-category" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text"> --}}
-  </div>
+
   <br>
-  <div class="form-group">
-    <label for="quiz-description">Description</label>
-    <textarea name="message" rows="10" cols="30">Quiz Description</textarea>
-  </div>
+
   <br>
   <button id="save-quiz-button" class="dashboard-button">Save Quiz</button>
 
@@ -59,13 +47,13 @@
       <br>
 
       <div class="choice-box">
-        <label>Option #1</label><input id="option-1" type="text">
+        {{!-- <label>Option #1</label><input id="option-1" type="text">
         <br>
         <label>Option #2</label><input id="option-2" type="text">
-        <br>
+        <br> --}}
         
       </div>
-      <button id="add-choice-button">+Choice</button>
+    <img id="add-choice-button" src="/assets/plus-button.svg">
       <br>
       <button id="add-question-button">Save Question</button>
     </div>
@@ -82,6 +70,8 @@
 
   var question_array = [];
   var optionsarray=[];
+ 
+
 
   $("#quiz-name").val("{{quiz_name}}");
 
@@ -97,13 +87,11 @@
   })
 
   $("#save-quiz-button").on("click", function () {
-    console.log("Create Quiz");
-    console.log("Question Array "+question_array[0].question);
     var newquiz = {
       quiz_name: $("#quiz-name").val(),
       questions:question_array
     }
-    console.log(newquiz.quiz_name);
+
     $.post("/api/addquiz", newquiz, function () {
 
     });
@@ -112,14 +100,13 @@
 
 
   $("#add-question-button").on("click", function () {
-    console.log("appending");
     var question={
       question_type:"MC",
       question:$("#question-input").val(),
       choices:optionsarray,
       QuizId:1
     }
-    
+  
     addQuestion(question);
     optionsarray=[];
   });
@@ -136,13 +123,11 @@
   }
 
 function getQuestions(){
-$.get("/api/addquiz/questions",function(results){
+$.get("/api/addquiz/questions/{{id}}",function(results){
 console.log(results)
+addQuestion(results[0]);
 });
 
 
 }
-
-
-
 </script>
