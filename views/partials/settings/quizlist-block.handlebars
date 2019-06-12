@@ -1,16 +1,17 @@
 <table>
      <tr>
     <th>Quiz Name</th>
+    <th>Category</th>
     <th>Date Created</th> 
-    <th>Invitees</th>
+    <th></th>
     <th></th>
   </tr>
  {{#each quizlist}}
  {{!-- <tr>
   <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td> --}}
  <tr id={{id}}>
-  <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})"
-   >{{quiz_name}}</a></td>
+    <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
+    <td>{{category}}</td> 
     <td>{{createdAt}}</td> 
     {{!-- <td><a href="/quiz/{{id}}">{{type}}</a></td> --}}
     <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>

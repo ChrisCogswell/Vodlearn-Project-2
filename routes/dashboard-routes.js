@@ -24,6 +24,13 @@ router.get("/quizlist", function(req, res) {
       });
 
 
+router.get("/quizview", function(req, res) {
+    db.Quiz.findAll({}).then(function(result) {
+        res.render("dashboard-stage",{layout: false, view:"quizview", quizlist:result});
+            });
+      });
+
+
 router.get("/quiz/:id", function(req, res) {
   db.Quiz.findAll({}).then(function(result) {
       res.render("dashboard-stage",{layout: false, view:"quizview", quizlist:result});
