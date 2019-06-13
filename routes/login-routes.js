@@ -69,8 +69,8 @@ router.post('/login', (req,res)=>{
             /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer*/
             var idToken = result.idToken.jwtToken;
             // sessionStorage.setItem('idToken', idToken);
-            res.json(idToken);
-            // res.redirect('/dashboard/'+cognitoUser.getUsername());
+            // res.json(idToken);
+             res.redirect('/dashboard/'+cognitoUser.getUsername());
         },
 
         onFailure: function(err) {
@@ -81,6 +81,14 @@ router.post('/login', (req,res)=>{
 
     
 });
+
+router.post("/signout/",(req,res)=>{
+    res.redirect("/");
+    // res.json("good");
+})
+
+
+
 //  Render 404 page for any unmatched routes
   router.get("*", function(req, res) {
     res.render("404");

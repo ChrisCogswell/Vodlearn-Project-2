@@ -1,23 +1,11 @@
 <div class="container">
 
-
-
   <h1>Add Quiz</h1>
   <h1>{{quiz_name}}</h1>
 
-
-
   <label>Quiz Name:</label>
   <input id="quiz-name" type="text"><br>
-
   <br>
-
-  <br>
-  <button id="save-quiz-button" class="dashboard-button">Save Quiz</button>
-
-
-  <br>
-
 <div>
   <table id="question-table">
    <tr>
@@ -61,28 +49,29 @@
 
   </div>
   {{!-- <button id="add-question-button" class="dashboard-button">+ Question</button> --}}
-
+<br>
+  <button id="save-quiz-button" class="dashboard-button">Save Quiz</button>
+<br>
 
 </div>
 </div>
-
+<script type="module" src="./sidebar.js"></script>
 <script>
 
   var question_array = [];
   var optionsarray=[];
- 
 
-
+  $(document).ready(function(){
+  getQuestions();
+  getSideBar("addquiz");
+  });
+  
   $("#quiz-name").val("{{quiz_name}}");
 
   $("#add-choice-button").on("click", function () {
     var newoption = "<label>Option #" + (optionsarray.length + 1) + "</label><input type='text'><br>"
     optionsarray.push(newoption);
-    question_array.push({
-      question_type:"multiple_choice",
-      question:"How Many is a Dozen?",
-      choices:["12","13","14","15"]
-    });
+ 
     $(".choice-box").append(optionsarray[optionsarray.length - 1]);
   })
 
@@ -91,11 +80,8 @@
       quiz_name: $("#quiz-name").val(),
       questions:question_array
     }
-
     $.post("/api/addquiz", newquiz, function () {
-
     });
-
   });
 
 
@@ -106,7 +92,7 @@
       choices:optionsarray,
       QuizId:1
     }
-  
+   
     addQuestion(question);
     optionsarray=[];
   });
@@ -117,17 +103,54 @@
     var question=formdata.question;
     var choicenumber=formdata.choices.length;
     var questiontype=formdata.question_type;
-
     $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
-
   }
 
-function getQuestions(){
-$.get("/api/addquiz/questions/{{id}}",function(results){
-console.log(results)
-addQuestion(results[0]);
-});
 
+
+ 
+
+
+
+
+function getQuestions(){
+  {{#if id}}
+$.get("/api/addquiz/questions/"+{{id}},function(data){
+console.log(data)
+data.forEach(function(element){
+    var questionid=question_array.length;
+    var question=element.question;
+    var choicenumber=1;
+    var questiontype=element.question_type;
+    $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
+})
+});
+{{else}}
+console.log("no id found");
+{{/if}}
 
 }
+function getSideBar(view){
+  console.log("gettinf sidebar");
+  $.get("/sidebar/"+view,function(data){
+    console.log(data);
+    $(".side-bar").html(data);
+    addSideBarEventListener();
+  })
+}
+
+function addSideBarEventListener(){
+  $("#back-button").on("click", 
+  function (){
+  console.log("Display Quizes");
+      $.get( "/quizlist", function( data ) {
+          $( "#display-stage" ).html( data );
+        
+          // document.getElementById("display-stage").innerHTML=data;
+        });
+  }
+  );
+
+}
+
 </script>
