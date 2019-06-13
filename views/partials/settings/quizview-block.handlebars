@@ -1,6 +1,16 @@
 <h1>This will show the quiz</h1>
-
-<table>
+<h1>Quiz Name</h1>
+<ul id="quizForm" class="list-group">
+          {{#each question}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a>{{this.question}}</a>
+            <form>
+                <input type="radio" name="" value=""> Choice<br>
+            </form>
+          </li>
+          {{/each}}
+        </ul>
+{{!-- <table>
      <tr>
     <th>ID</th>
     <th>Question</th>
@@ -11,52 +21,36 @@
     <th></th>
   </tr>
  {{#each question}}
- {{!-- <tr>
-  <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td> --}}
  <tr id={{id}}>
     <td>{{id}}</td> 
     <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})" >{{question}}</a></td>
     <td>{{question_type}}</td> 
     <td>{{answer}}</td> 
     <td>{{createdAt}}</td> 
-    {{!-- <td><a href="/quiz/{{id}}">{{type}}</a></td> --}}
     <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
-</table>
+</table> --}}
 
 <script>
+
+var $quizForm = $("#quizForm");
+
       var API = {
-    saveQuestion: function(question) {
-      return $.ajax({
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        url: "api/questions",
-        data: JSON.stringify(question)
-      });
-    },
     getQuestion: function() {
       return $.ajax({
-        url: "api/questions",
+        url: "api/addquestion",
         type: "GET"
       });
     },
-    deleteQuestion: function(id) {
-      return $.ajax({
-        url: "api/questions/" + id,
-        type: "DELETE"
-      });
-    }
   };
 
   var refreshQuestions = function() {
   API.getQuestion().then(function(data) {
     var $question = data.map(function(question) {
       var $a = $("<a>")
-        .text(question.question_name)
-        .attr("href", "/example/" + question.id);
+        .text(question.question)
+        .attr("href", "/quiz/" + question.id);
 
       var $li = $("<li>")
         .attr({
@@ -65,17 +59,33 @@
         })
         .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+        return $li;
 
-      $li.append($button);
 
-      return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($question);
+    $quizForm.empty();
+    $quizForm.append($question);
   });
 };
 </script>
+    {{!-- saveQuestion: function(question) {
+      return $.ajax({
+        headers: {
+          "Content-Type": "application/json"
+        },
+        type: "POST",
+        url: "api/",
+        data: JSON.stringify(question)
+      });
+    }, --}}
+    {{!-- deleteQuestion: function(id) {
+      return $.ajax({
+        url: "api/questions/" + id,
+        type: "DELETE"
+      });
+    } --}}
+      {{!-- var $button = $("<button>")
+        .addClass("btn btn-danger float-right delete")
+        .text("ｘ"); --}}
+      {{!-- $li.append($button); --}}

@@ -46,7 +46,7 @@ var db = require("../models");
     });
 
     router.get("/api/addquiz/questions/:id",function(){
-      db.Question.findAll({where:{QuizId:req.params.id}}).then(function(results){
+      db.Question.findAll({}).then(function(results){
         res.json(results);
       })
     });
