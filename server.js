@@ -22,11 +22,13 @@ app.set("view engine", "handlebars");
 var htmlroutes = require("./routes/html-routes.js");
 var apiroutes=require("./routes/api-routes.js");
 var dashboardroutes =require("./routes/dashboard-routes.js");
+var quizroutes =require("./routes/quiz-routes.js");
 var loginroutes=require("./routes/login-routes.js");
 
 app.use(htmlroutes);
 app.use(apiroutes);
 app.use(dashboardroutes);
+app.use(quizroutes);
 app.use(loginroutes);
 
 var syncOptions = { force: false };

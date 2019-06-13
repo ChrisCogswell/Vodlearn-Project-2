@@ -3,7 +3,7 @@
     <th>Quiz Name</th>
     <th>Category</th>
     <th>Date Created</th> 
-    <th></th>
+    <th>Users</th>
     <th></th>
   </tr>
  {{#each quizlist}}
@@ -18,10 +18,14 @@
     </tr>
 {{/each}}
 </table>
-<button onclick="addQuiz()" id="addquiz-button" class="dashboard-button">+Add Course</button>
+<button onclick="addQuiz()" id="addquiz-button" class="dashboard-button">+Add Quiz</button>
 
 
     <script>
+
+        $(document).ready(function(){
+            getSideBar("main");
+        });
 
 function updateQuiz(id){
     console.log('Display Add Quiz');
@@ -46,6 +50,44 @@ $.ajax({
         $("#"+id).remove();
     }
 });
+
+}
+
+
+
+function getSideBar(view){
+  console.log("gettinf sidebar");
+  $.get("/sidebar/"+view,function(data){
+    console.log(data);
+    $(".side-bar").html(data);
+    addSideBarEventListener();
+  })
+}
+
+function addSideBarEventListener(){
+  $("#quizlist-button").on("click", 
+  function (){
+  console.log("Display Quizes");
+      $.get( "/quizlist", function( data ) {
+          $( "#display-stage" ).html( data );
+          getSideBar("main");
+          // document.getElementById("display-stage").innerHTML=data;
+        });
+  }
+  );
+
+  $("#settings-button").on("click", 
+function (){
+console.log("Display Settings");
+    $.get( "/settings", function( data ) {
+        $( "#display-stage" ).html( data );
+        // document.getElementById("display-stage").innerHTML=data;
+      });
+    }
+    );
+
+
+
 
 }
 
