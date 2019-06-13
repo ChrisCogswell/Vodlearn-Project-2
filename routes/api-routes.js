@@ -32,9 +32,15 @@ var db = require("../models");
   });
 
 
-    // Create a new question
+    // Create a new example
     router.post("/api/addquestion", function(req, res) {
       db.Question.create({question_name:req.body.question_name, question_type:req.body.question_type, answer:req.body.answer}).then(function(results) {
+        res.json(results);
+      });
+    });
+
+    router.get("/api/addquestion", function(req, res) {
+      db.Question.findAll({}).then(function(results) {
         res.json(results);
       });
     });

@@ -34,7 +34,9 @@ router.get("/quizview", function(req, res) {
 
 
 router.get("/quiz/:id", function(req, res) {
-  db.Question.findAll({}).then(function(result) {
+  db.Question.findAll({where: {
+      QuizId: req.params.id
+  }}).then(function(result) {
       res.render("dashboard-stage",{layout: false, view:"quizview", question:result});
           });
     });      

@@ -2,8 +2,10 @@
 
 <table>
      <tr>
-    <th>Question</th>
     <th>ID</th>
+    <th>Question</th>
+    <th>Type</th>
+    <th>Answer</th>
     <th>Date Created</th> 
     <th>Invitees</th>
     <th></th>
@@ -12,8 +14,10 @@
  {{!-- <tr>
   <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td> --}}
  <tr id={{id}}>
-  <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})" >{{question}}</a></td>
     <td>{{id}}</td> 
+    <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})" >{{question}}</a></td>
+    <td>{{question_type}}</td> 
+    <td>{{answer}}</td> 
     <td>{{createdAt}}</td> 
     {{!-- <td><a href="/quiz/{{id}}">{{type}}</a></td> --}}
     <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
@@ -21,7 +25,7 @@
 {{/each}}
 </table>
 
-{{!-- <script>
+<script>
       var API = {
     saveQuestion: function(question) {
       return $.ajax({
@@ -74,4 +78,4 @@
     $exampleList.append($question);
   });
 };
-</script> --}}
+</script>
