@@ -36,7 +36,10 @@ router.get("/addquiz/:id", function(req, res) {
         console.log(result);
        res.render("dashboard-stage",{layout: false, view:"addquiz", quiz_name: result.quiz_name,id:result.id}); 
     })
-    
+});
+
+router.get("/sidebar/:view",function(req,res){
+    res.render("sidebar-stage",{layout:false,view:req.params.view})
 });
 
 module.exports = router;

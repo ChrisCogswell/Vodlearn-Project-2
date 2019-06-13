@@ -1,0 +1,91 @@
+<table>
+     <tr>
+    <th>Quiz Name</th>
+    <th>Date Created</th> 
+    <th>Users</th>
+    <th></th>
+  </tr>
+ {{#each quizlist}}
+ <tr id={{id}}>
+  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
+    <td>{{createdAt}}</td> 
+    <td></td>
+    <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
+    </tr>
+{{/each}}
+</table>
+<button onclick="addQuiz()" id="addquiz-button" class="dashboard-button">+Add Quiz</button>
+
+
+    <script>
+
+        $(document).ready(function(){
+            getSideBar("main");
+        });
+
+function updateQuiz(id){
+    console.log('Display Add Quiz');
+        $.get( '/addquiz/'+id, function( data ) {
+            $( '#display-stage' ).html( data );
+          });
+    }
+
+function addQuiz(){
+    console.log('Display Add Quiz');
+        $.get( '/addquiz/', function( data ) {
+            $( '#display-stage' ).html( data );
+          });
+    }
+
+function deleteQuiz(id){
+console.log("Deleteing Quiz "+id);
+$.ajax({
+    url: '/api/delete/'+id,
+    type: 'DELETE',
+    success: function(result) {
+        $("#"+id).remove();
+    }
+});
+
+}
+
+
+
+function getSideBar(view){
+  console.log("gettinf sidebar");
+  $.get("/sidebar/"+view,function(data){
+    console.log(data);
+    $(".side-bar").html(data);
+    addSideBarEventListener();
+  })
+}
+
+function addSideBarEventListener(){
+  $("#quizlist-button").on("click", 
+  function (){
+  console.log("Display Quizes");
+      $.get( "/quizlist", function( data ) {
+          $( "#display-stage" ).html( data );
+          getSideBar("main");
+          // document.getElementById("display-stage").innerHTML=data;
+        });
+  }
+  );
+
+  $("#settings-button").on("click", 
+function (){
+console.log("Display Settings");
+    $.get( "/settings", function( data ) {
+        $( "#display-stage" ).html( data );
+        // document.getElementById("display-stage").innerHTML=data;
+      });
+    }
+    );
+
+
+
+
+}
+
+
+</script>
