@@ -13,6 +13,7 @@
     <th>Question Type</th>
     <th>Question</th>
     <th># Choices</th>
+    <th></th>
 </tr> 
 
   </table>
@@ -106,23 +107,20 @@
     $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
   }
 
+function deleteQuestion(){
 
-
- 
-
-
-
+}
 
 function getQuestions(){
   {{#if id}}
 $.get("/api/addquiz/questions/"+{{id}},function(data){
 console.log(data)
 data.forEach(function(element){
-    var questionid=question_array.length;
+    var questionid=element.id;
     var question=element.question;
     var choicenumber=1;
     var questiontype=element.question_type;
-    $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
+    $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td>  <td><img id="delete-question-button" src="/assets/delete-button.svg"></td></tr>`);
 })
 });
 {{else}}
@@ -148,6 +146,17 @@ function addSideBarEventListener(){
         
           // document.getElementById("display-stage").innerHTML=data;
         });
+  }
+  );
+
+
+   $("#preview-button").on("click", 
+  function (){
+  {{#if id}}
+  window.location="/quiz/"+{{id}};
+  {{else}}
+
+  {{/if}}
   }
   );
 
