@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(140, 213, 255);
+    background-color: white;
     color: black;
     font-family: 'Open Sans', sans-serif;
     padding: 0px;
@@ -325,8 +325,13 @@ tr:nth-child(even) {
   }
 
 .questionmaker{
+<<<<<<< HEAD
 background-color: white;
 width: 50%;
+=======
+background-color:lightgray;
+width: 100%;
+>>>>>>> 962bec5aa2768ae1319fe29f7b77b83bf019a2a9
 position: relative;
 margin: 10px;
 padding: 5px;
