@@ -51,6 +51,7 @@ this.addEventListener("focusout",function(){
 
 var $slider = document.getElementById('slider');
 var $toggle = document.getElementById('signup-button');
+var $toggleBack = document.getElementById('submit-button');
 
 $toggle.addEventListener('click', function() {
     var isOpen = $slider.classList.contains('signup-container');
