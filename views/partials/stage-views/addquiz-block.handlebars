@@ -111,12 +111,7 @@ $(".close-button").on("click",function(){
   questions:question_array
   }
 });
-
   });
-
-
-
-
 
   $("#add-question-button").on("click", function () {
     
@@ -145,11 +140,17 @@ $(".close-button").on("click",function(){
     var question=formdata.question;
     var choicenumber=formdata.choices.length;
     var questiontype=formdata.question_type;
-    $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
+    $("#question-table").append(`<tr id="${questionid}""><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td><td><img></td></tr>`);
   }
 
 function deleteQuestion(id){
 
+$("#"+id).remove();
+
+$.ajax({
+  type: "DELETE",
+  url: "/api/deletequiz/questions/"+id
+  });
 }
 
 function getQuestions(){
@@ -161,7 +162,7 @@ data.forEach(function(element){
     var question=element.question;
     var choicenumber=1;
     var questiontype=element.question_type;
-    $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td>  <td><img id="delete-question-button" src="/assets/delete-button.svg"></td></tr>`);
+    $("#question-table").append(`<tr id="${questionid}"><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td>  <td><img data-id="${questionid}" onclick="deleteQuestion(${questionid})" class="delete-button" src="/assets/delete-button.svg"></td></tr>`);
 })
 });
 {{else}}

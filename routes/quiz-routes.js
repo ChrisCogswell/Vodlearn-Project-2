@@ -19,6 +19,21 @@ router.get("/quiz/:id", (req,res)=>{
   });
 });
 
+
+router.post("/quiz/grade", (req,res)=>{
+
+
+});
+
+router.get("quiz/user/:id",(req,res)=>{
+  res.render("quiz", {
+    quiz_id:quiz.id,
+    quiz_name: quiz.quiz_name,
+    question: questions,
+
+});
+});
+
 router.get("/quiz/choices/:id", (req,res)=>{
   var quizarray=[];
  

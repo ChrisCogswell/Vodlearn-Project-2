@@ -65,6 +65,14 @@ var db = require("../models");
       })
     });
 
+
+router.delete("/api/deletequiz/questions/:id",function(req,res){
+  db.Question.destroy({ where: { id: req.params.id } }).then(function(result) {
+    res.json(result);
+  });
+})
+
+
 module.exports = router;
 
 function createQuestions(questions, quizid){

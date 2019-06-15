@@ -27,7 +27,7 @@
 </ol>
 </form>
 
-<button class="dashboard-button">Submit</button>
+<button id="submit-button" class="dashboard-button">Submit</button>
 
 {{!-- {{#each choice}}
 <h1>{{choice}}</h1>
@@ -35,18 +35,35 @@
 
 
 <script>
+  var questionlist;
 $(document).ready(function(){
   getChoices();
 })
+
+$("#submit-button").on("click",function(){
+submitQuiz();
+
+})
+
+function submitQuiz(){
+
+var useranswers=[]
+questionlist.forEach(function(question){
+useranswers.push(new QuestionObject(question.id,parseInt($("input[name=choice-"+question.id+"]").val())));
+})
+
+console.log(useranswers);
+
+}
 
 
 function getChoices(){
 $.get("/quiz/choices/{{quiz_id}}", function(data){
 console.log(data);
-
+questionlist=data;
 data.forEach(function(question){
 question.Choices.forEach(function(choice){
-$("#"+question.id).append("<p class='choice-div'>"+choice.choice+"</p><input type='radio'>");
+$("#"+question.id).append("<p class='choice-div'>"+choice.choice+"</p><input id='questionchoice-"+choice.id+"' value="+choice.id+" name='choice-"+question.id+"' type='radio'>");
 
 })
 
@@ -60,7 +77,10 @@ $("#"+question.id).append("<p class='choice-div'>"+choice.choice+"</p><input typ
 
 }
 
-
+function QuestionObject(questionid,choiceid){
+this.questionid=questionid,
+this.choiceid=choiceid
+}
 
 
 
