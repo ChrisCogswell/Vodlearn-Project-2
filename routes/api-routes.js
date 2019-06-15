@@ -38,11 +38,11 @@ var db = require("../models");
 
 
     // Create a new example
-    router.post("/api/addquestion", function(req, res) {
-      db.Question.create({question_name:req.body.question_name}).then(function(results) {
-        res.json(results);
-      });
-    });
+    // router.post("/api/addquestion", function(req, res) {
+    //   db.Question.create({question_name:req.body.question_name}).then(function(results) {
+    //     res.json(results);
+    //   });
+    // });
 
     router.get("/api/addquiz/questions/:id",function(req,res){
       db.Question.findAll({where:{QuizId:req.params.id}}).then(function(results){
