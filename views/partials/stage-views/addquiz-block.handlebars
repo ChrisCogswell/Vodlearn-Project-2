@@ -70,10 +70,17 @@
   $("#quiz-name").val("{{quiz_name}}");
 
   $("#add-choice-button").on("click", function () {
-    var newoption = "<label>Option #" + (optionsarray.length + 1) + "</label><input type='text'><br>"
-    optionsarray.push(newoption);
  
-    $(".choice-box").append(optionsarray[optionsarray.length - 1]);
+    var option={
+      choice: "choice",
+      QuestionId: null,
+      correct: false
+    }
+
+
+    optionsarray.push(option);
+ 
+    $(".choice-box").append("<label>Option #" + (optionsarray.length) + "</label><input id='option-"+optionsarray.length+ "' type='text'><label>Is Correct?</label><input id='iscorrect-"+optionsarray.length+  "' type='checkbox' name='iscorrect' value='correct' checked><br>");
   })
 
   $("#save-quiz-button").on("click", function () {
@@ -87,6 +94,13 @@
 
 
   $("#add-question-button").on("click", function () {
+    
+    for(var i =0;i<optionsarray.length;i++){
+      console.log("Choice: "+$("#option-"+(i+1)).val());
+      optionsarray[i].choice=$("#option-"+(i+1)).val();
+      optionsarray[i].correct=$("#iscorrect-"+(i+1)).is(':checked');
+    }
+   
     var question={
       question_type:"MC",
       question:$("#question-input").val(),
@@ -150,12 +164,24 @@ function addSideBarEventListener(){
   );
 
 
+    $("#users-button").on("click", 
+  function (){
+  $.get( "/userlist", function( data ) {
+          $( "#display-stage" ).html( data );
+          // document.getElementById("display-stage").innerHTML=data;
+        });
+  }
+  );
+
+
+
+
    $("#preview-button").on("click", 
   function (){
   {{#if id}}
   window.location="/quiz/"+{{id}};
   {{else}}
-
+  alert("You must save this quiz before you can preview it");
   {{/if}}
   }
   );

@@ -49,5 +49,14 @@ this.addEventListener("focusout",function(){
 
 });
 
+var $slider = document.getElementById('slider');
+var $toggle = document.getElementById('signup-button');
+
+$toggle.addEventListener('click', function() {
+    var isOpen = $slider.classList.contains('signup-container');
+
+    $slider.setAttribute('class', isOpen ? 'slide-out' : 'signup-container');
+});
+
 
 

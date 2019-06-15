@@ -1,43 +1,54 @@
 <div class="nav-bar">
-<h1>Quiz</h1>
+
+<h1>{{quiz_name}}</h1>
 <br>
 <a id="sign-out">Sign Out</a>
 </div>
 
 
-{{!-- <div id="quiz-header">
-{{> quiz-views/quiz-header sleep=false}}
-
-</div>
-
-
-
-<div id="quiz-body">
-
-{{> quiz-views/quiz-body sleep=false}}
-</div> --}}
-
-
-{{quiz}}
+{{!-- {{#each quiz}}
 
 <h1>Quiz Name: {{quiz_name}}</h1>
 
-
+{{/each}} --}}
 <br>
 <form>
 <ol>
  {{#each question}}
-<li>
+<li id={{id}}>
 {{question}}
-<input type="radio">
+
 </li>
 <br>
 {{/each}}
 </ol>
 </form>
 
-{{#each choice}}
+{{!-- {{#each choice}}
 <h1>{{choice}}</h1>
+{{/each}} --}}
+{{#each choices}}
+{{choice}}
 {{/each}}
 
+<script>
+$(document).ready(function(){
+  getChoices();
+})
 
+
+function getChoices(){
+$.get("/quiz/choices/{{quiz_id}}", function(data){
+console.log(data);
+})
+
+
+
+}
+
+
+
+
+
+
+</script>

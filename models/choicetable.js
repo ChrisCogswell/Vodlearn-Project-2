@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
       choice: {
         type: DataTypes.STRING,
         allowNull: false,
-      }
+      },
+      correct:{ type: DataTypes.BOOLEAN, defaultValue: false}
     
     });
 
