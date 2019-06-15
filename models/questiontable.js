@@ -17,6 +17,8 @@ module.exports = function(sequelize, DataTypes) {
           onDelete: "cascade"
       });
 
+      Question.hasMany(models.Choice);
+  
 
     };
 

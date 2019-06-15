@@ -1,4 +1,51 @@
+<div class="nav-bar">
+<h1>Quiz</h1>
+<br>
+<a id="sign-out">Sign Out</a>
+</div>
 
+
+{{!-- <div id="quiz-header">
+{{> quiz-views/quiz-header sleep=false}}
+</div>
+<div id="quiz-body">
+{{> quiz-views/quiz-body sleep=false}}
+</div> --}}
+
+
+{{#each quiz}}
+
+<h1>Quiz Name: {{quiz_name}}</h1>
+
+{{/each}}
+<br>
+<form>
+<ol>
+ {{#each question}}
+<li>
+{{question}}
+<input type="radio">
+</li>
+<br>
+{{/each}}
+</ol>
+</form>
+
+{{#each choice}}
+<h1>{{choice}}</h1>
+{{/each}}
+
+
+
+
+
+
+
+
+
+
+
+{{!-- 
   <h1></h1>
 <form>
 <ul>
@@ -58,4 +105,4 @@
     $exampleList.append($question);
   });
 };
-</script>
+</script> --}}
