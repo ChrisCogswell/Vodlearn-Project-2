@@ -7,7 +7,25 @@ module.exports = function(sequelize, DataTypes) {
           len: [1]
         }
       },
-      quiz_list: DataTypes.STRING
-    });
+      email:{
+        type:DataTypes.STRING,
+  
+      }
+      });
+
+      User.associate=function(models){
+        User.belongsTo(models.Quiz, {
+          foreignKey: {allowNull: false }, 
+          onDelete: "cascade"
+        });
+
+        
+      }
+      
+    
+
+
+    
+
     return User;
   };

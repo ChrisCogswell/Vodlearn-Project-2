@@ -26,8 +26,8 @@ router.get("/quizlist", function(req, res) {
       });
 
 router.get("/userlist", function(req, res) {
-        db.Quiz.findAll({}).then(function(result) {
-            res.render("dashboard-stage",{layout: false, view:"userlist", quizlist:result});
+        db.User.findAll({}).then(function(result) {
+            res.render("dashboard-stage",{layout: false, view:"userlist", userlist:result});
                 });
           });
   

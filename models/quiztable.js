@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     Quiz.hasMany(models.Question);
+    Quiz.hasMany(models.User);
   };  
   
   

@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
       // A Post can't be created without an Author due to the foreign key constraint
       Question.belongsTo(models.Quiz, {
         foreignKey: {allowNull: false }, 
-          onDelete: "cascade"
+          onDelete: "cascade",
+          onUpdate: "cascade"
       });
 
       Question.hasMany(models.Choice);
