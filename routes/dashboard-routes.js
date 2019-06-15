@@ -24,6 +24,12 @@ router.get("/quizlist", function(req, res) {
         res.render("dashboard-stage",{layout: false, view:"quizlist", quizlist:result});
             });
       });
+
+router.get("/userlist", function(req, res) {
+        db.Quiz.findAll({}).then(function(result) {
+            res.render("dashboard-stage",{layout: false, view:"userlist", quizlist:result});
+                });
+          });
   
 router.get("/addquiz", function(req, res) {
     res.render("dashboard-stage",{layout: false, view:"addquiz"});

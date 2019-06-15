@@ -17,10 +17,15 @@ var db = require("../models");
       console.log("Success");
       console.log(req.body.questions);
       console.log(results);
-      req.body.questions.forEach(function(element){
+      var questions=req.body.questions;
+      questions.forEach(function(element){
         element.QuizId=results.id;
       });
-       db.Question.bulkCreate(req.body.questions);
+      
+      createQuestions(req.body.questions);
+
+      
+
     });
   });
 
@@ -33,11 +38,11 @@ var db = require("../models");
 
 
     // Create a new example
-    router.post("/api/addquestion", function(req, res) {
-      db.Question.create({question_name:req.body.question_name}).then(function(results) {
-        res.json(results);
-      });
-    });
+    // router.post("/api/addquestion", function(req, res) {
+    //   db.Question.create({question_name:req.body.question_name}).then(function(results) {
+    //     res.json(results);
+    //   });
+    // });
 
     router.get("/api/addquiz/questions/:id",function(req,res){
       db.Question.findAll({where:{QuizId:req.params.id}}).then(function(results){
@@ -50,3 +55,18 @@ module.exports = router;
 
 
 
+function createQuestions(questions, quizid){
+questions.forEach(function(question){
+db.Question.create({question:question.question, question_type: question.question_type, QuizId: question.QuizId}).then(function(results){
+console.log(question);
+  var choices=question.choices;
+      choices.forEach(function(element){
+        element.QuestionId=results.id;
+      });
+
+
+  db.Choice.bulkCreate(question.choices);
+})
+});
+
+}

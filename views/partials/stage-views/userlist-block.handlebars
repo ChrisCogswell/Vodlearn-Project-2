@@ -1,0 +1,16 @@
+<table>
+     <tr>
+    <th>Name</th>
+    <th>Score</th> 
+    <th></th>
+    <th></th>
+  </tr>
+ {{#each userlist}}
+ <tr id={{id}}>
+  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
+    <td>{{createdAt}}</td> 
+    <td></td>
+    <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
+    </tr>
+{{/each}}
+</table>
