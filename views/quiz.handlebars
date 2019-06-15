@@ -15,14 +15,19 @@
 <form>
 <ol>
  {{#each question}}
-<li id={{id}}>
-{{question}}
+<li >
+  {{question}}
+  <br>
+  <div id={{id}} class="choice-div">
 
+</div>
 </li>
 <br>
 {{/each}}
 </ol>
 </form>
+
+<button class="dashboard-button">Submit</button>
 
 {{!-- {{#each choice}}
 <h1>{{choice}}</h1>
@@ -40,6 +45,17 @@ $(document).ready(function(){
 function getChoices(){
 $.get("/quiz/choices/{{quiz_id}}", function(data){
 console.log(data);
+
+data.forEach(function(question){
+question.Choices.forEach(function(choice){
+$("#"+question.id).append("<p class='choice-div'>"+choice.choice+"</p><input type='radio'>");
+
+})
+
+
+});
+
+
 })
 
 

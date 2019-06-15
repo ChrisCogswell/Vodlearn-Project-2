@@ -11,7 +11,15 @@ var db = require("../models");
     });
   });
 
-  // Create a new quiz
+//ADD QUIZ USER
+  router.post("/api/adduser",(req,res)=>{
+    db.User.create({user_name:req.body.user_name,email:req.body.email}).then(function(results){
+      res.json(results);
+    });
+
+  })
+
+// CREATE QUIZ
   router.post("/api/addquiz", function(req, res) {
     db.Quiz.create({quiz_name:req.body.quiz_name}).then(function(results) {
       console.log("Success");
@@ -24,26 +32,33 @@ var db = require("../models");
       
       createQuestions(req.body.questions);
 
-      
-
     });
   });
 
-  // Delete a quiz by id
+// DELETE QUIZ
   router.delete("/api/delete/:id", function(req, res) {
     db.Quiz.destroy({ where: { id: req.params.id } }).then(function(dbQuizList) {
       res.json(dbQuizList);
     });
   });
 
+//UPDATE QUIZ
+  router.put("/api/updatequiz/:id",function(req,res){
+    db.Quiz.update({quiz_name:req.body.quiz_name},{where:{id:req.params.id}}).then(function(results){
 
-    // Create a new example
-    // router.post("/api/addquestion", function(req, res) {
-    //   db.Question.create({question_name:req.body.question_name}).then(function(results) {
-    //     res.json(results);
-    //   });
-    // });
+ var questions=req.body.questions;
+      questions.forEach(function(element){
+      element.QuizId=req.params.id;
+      createQuestions(req.body.questions);
+      });
+    
+    
 
+    });
+   
+  })
+
+//ADD QUESTION TO QUIZ
     router.get("/api/addquiz/questions/:id",function(req,res){
       db.Question.findAll({where:{QuizId:req.params.id}}).then(function(results){
         res.json(results);
@@ -51,9 +66,6 @@ var db = require("../models");
     });
 
 module.exports = router;
-
-
-
 
 function createQuestions(questions, quizid){
 questions.forEach(function(question){

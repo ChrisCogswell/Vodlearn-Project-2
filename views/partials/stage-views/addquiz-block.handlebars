@@ -20,27 +20,21 @@
 </div>
 
 
-  <div id="question-list">
+<br>
+  <button onclick="showAddQuestion()" id="showaddquiz-button" class="dashboard-button">Add Question</button>
+<br>
 
-    <div class="questionmaker">
-      <label>Question Type:</label>
-      <input list="questiontype" name="questiontype">
-      <datalist id="questiontype">
-        <option value="True/False">
-        <option value="Multiple Choice">
-      </datalist>
-      <br>
+</div>
+</div>
 
-      <label>Question:</label>
+<div class="modal">
+<div class="modal-content">
+<span class="close-button">&times;</span>
+<h2>Add Question</h2>
+ <label>Question:</label>
       <input id="question-input" type="text">
       <br>
-
-      <div class="choice-box">
-        {{!-- <label>Option #1</label><input id="option-1" type="text">
-        <br>
-        <label>Option #2</label><input id="option-2" type="text">
-        <br> --}}
-        
+      <div class="choice-box"> 
       </div>
     <img id="add-choice-button" src="/assets/plus-button.svg">
       <br>
@@ -49,13 +43,21 @@
 
 
   </div>
-  {{!-- <button id="add-question-button" class="dashboard-button">+ Question</button> --}}
+  
 <br>
+
+  {{#if id}}
+  <button id="update-quiz-button" class="dashboard-button">Update Quiz</button>
+  {{else}}
   <button id="save-quiz-button" class="dashboard-button">Save Quiz</button>
-<br>
+  {{/if}}
 
 </div>
 </div>
+
+
+
+
 <script type="module" src="./sidebar.js"></script>
 <script>
 
@@ -66,6 +68,14 @@
   getQuestions();
   getSideBar("addquiz");
   });
+
+  function showAddQuestion(){
+$(".modal").addClass("show-modal");
+}
+
+$(".close-button").on("click",function(){
+  $(".modal").removeClass("show-modal");
+});
   
   $("#quiz-name").val("{{quiz_name}}");
 
@@ -93,6 +103,21 @@
   });
 
 
+  $("#update-quiz-button").on("click", function(){
+    $.ajax({
+  type: "PUT",
+  url: "/api/updatequiz/{{id}}",
+  data: {quiz_name:$("#quiz-name").val(),
+  questions:question_array
+  }
+});
+
+  });
+
+
+
+
+
   $("#add-question-button").on("click", function () {
     
     for(var i =0;i<optionsarray.length;i++){
@@ -110,6 +135,8 @@
    
     addQuestion(question);
     optionsarray=[];
+    $(".choice-box").empty();
+    $("#question-input").val("");
   });
 
   function addQuestion(formdata){
@@ -121,7 +148,7 @@
     $("#question-table").append(`<tr><td>${questionid}</td><td>${questiontype}</td><td>${question}</td><td>${choicenumber}</td></tr>`);
   }
 
-function deleteQuestion(){
+function deleteQuestion(id){
 
 }
 
