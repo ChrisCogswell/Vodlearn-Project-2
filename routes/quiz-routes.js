@@ -4,11 +4,14 @@ var db = require("../models");
 
 router.get("/quiz/:id", (req,res)=>{
 //Sequelize
-db.Question.findAll({where:{QuizId:req.params.id}}).then(function(result1){
-    db.Quiz.findAll({where:{id:req.params.id}}).then(function(result2){
-    res.render("quiz", {
-      question: result1,
-      quiz: result2
+      db.Quiz.findAll({where:{id:req.params.id}}).then(function(result1){
+      db.Question.findAll({where:{QuizId:req.params.id}}).then(function(result2){
+      db.Choice.findAll({where:{QuestionId:req.params.id}}).then(function(result3){ 
+        res.render("quiz", {
+          quiz: result1,
+          question: result2,
+          choice: result3
+      });
     });
   });
   });
