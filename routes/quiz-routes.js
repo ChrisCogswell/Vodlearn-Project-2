@@ -4,7 +4,7 @@ var db = require("../models");
 
 router.get("/quiz/:id", (req,res)=>{
 //Sequelize
-      db.Quiz.findAll({where:{id:req.params.id}}).then(function(result1){
+      db.Quiz.findOne({where:{id:req.params.id}}).then(function(result1){
       db.Question.findAll({where:{QuizId:req.params.id}}).then(function(result2){
       db.Choice.findAll({where:{QuestionId:req.params.id}}).then(function(result3){ 
         res.render("quiz", {

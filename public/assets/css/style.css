@@ -241,6 +241,10 @@ display: inline;
 .nav-bar h1{
     display: inline;
 }
+
+a {
+    
+}
 /* 
 .center{
     margin: 0 auto;
@@ -325,13 +329,8 @@ tr:nth-child(even) {
   }
 
 .questionmaker{
-<<<<<<< HEAD
-background-color: white;
-width: 50%;
-=======
 background-color:lightgray;
 width: 100%;
->>>>>>> 962bec5aa2768ae1319fe29f7b77b83bf019a2a9
 position: relative;
 margin: 10px;
 padding: 5px;
@@ -355,7 +354,7 @@ border-width: 0;
     background-color: inherit;
     color:rgb(0, 70, 136);
     border-width: 0 0 1px 0;
-    border-color: white;
+    border-color: rgb(0, 70, 136);
     border-style: solid;
 }
 #add-choice-button{
