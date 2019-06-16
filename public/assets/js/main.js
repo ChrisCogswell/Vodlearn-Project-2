@@ -63,19 +63,41 @@ $toggleBack
 });
 
 $("#create-account-button").on("click", createAccount);
-
+$("#login-button").on("click", login);
 
 function createAccount(){
 data={
 username:$("#username-input-signup").val(),
 email: $("#email-input-signup").val(),
 password: $("#password-input-signup").val()
+}
+$.post("/signup",data,function(results){
+    if(results.err !=null){
+    alert(results.err.message);}
+    if(results.token){
+        sessionStorage.setItem('token', results.token);
+        window.location.href = "./dashboard/"+results.username;
+    }
+
+})
 
 }
 
 
-$.post("/signup",data,function(results){
-    alert(results.err.message);
-})
+function login(){
+var data={
+username:$("#input-username").val(),
+password:$("#input-password").val()
+};
+
+    $.post("/login",data,function(results){
+        if(results.err !=null){
+        alert(results.err.message);}
+        if(results.token){
+            sessionStorage.setItem('token', results.token);
+            window.location.href = "./dashboard/"+results.token;
+        }
+    
+    });
 
 }

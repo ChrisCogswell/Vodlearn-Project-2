@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var db = require("../models");
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 global.fetch = require('node-fetch');
 
@@ -40,7 +41,11 @@ router.post('/signup', (req,res)=>{
         }
         cognitoUser = result.user;
         console.log('user name is ' + cognitoUser.getUsername());
-        res.redirect('/dashboard/'+cognitoUser.getUsername());
+        
+        db.Owner.create({user_name:result.user.getUsername()}).then(function(){
+           var token=cognitoUser.getUsername();
+        res.json({token:token});    
+        })
     
     });
     
@@ -72,11 +77,14 @@ router.post('/login', (req,res)=>{
             var idToken = result.idToken.jwtToken;
             // sessionStorage.setItem('idToken', idToken);
             // res.json(idToken);
-             res.redirect('/dashboard/'+cognitoUser.getUsername());
+            var token=cognitoUser.getUsername();
+            res.json({token:token});
+            //  res.redirect('/dashboard/'+cognitoUser.getUsername());
         },
 
         onFailure: function(err) {
             console.log(err);
+            res.json({err:err});
         },
 
     });

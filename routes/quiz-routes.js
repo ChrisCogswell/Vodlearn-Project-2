@@ -21,31 +21,26 @@ router.get("/quiz/:id", (req,res)=>{
 
 
 router.post("/quiz/grade", (req,res)=>{
-console.log(req.body);
-
-var choices=[];
-var correct=0;
-
-
-req.body.results.forEach(function(element){
-  choices.push(element.choiceid)
-})
-
-db.Choice.findAll({where:{id:choices}}).then(function(results){
-
-  results.forEach(function(choice){
+  var choices=[];
+  var correct=0;
+  req.body.results.forEach(function(element){
+    choices.push(element.choiceid)
+                                            })
+  db.Choice.findAll({where:{id:choices}}).then(function(results){
+    results.forEach(function(choice){
       if(choice.correct){
         correct++;
-      }
+                        }
+                                    });
+    var score=(correct/results.length)*100;
+   db.User.update({attempts:1, score:score},{where:{id:req.body.user}}).then(function(){
+      res.json({results:(correct/results.length)});
   })
 
-res.json({results:(correct/results.length)});
-
 })
-
-
-
 });
+
+
 
 router.get("/quiz/user/:id",(req,res)=>{
 
@@ -55,14 +50,10 @@ router.get("/quiz/user/:id",(req,res)=>{
     quiz_id:result.id,
     quiz_name: result.quiz_name,
     question: result.Questions,
-});
+                      });
 
-  });
-
-
-
-  
-});
+                                              });
+                                      });
 
 router.get("/quiz/choices/:id", (req,res)=>{
   var quizarray=[];

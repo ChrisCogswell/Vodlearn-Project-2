@@ -8,10 +8,13 @@ module.exports = function(sequelize, DataTypes) {
     });
     
   Quiz.associate = function(models) {
-    // Associating Author with Posts
-    // When an Author is deleted, also delete any associated Posts
+
     Quiz.hasMany(models.Question);
     Quiz.hasMany(models.User);
+    Quiz.belongsTo(models.Owner, {
+      foreignKey: {allowNull: false }, 
+        onDelete: "cascade"
+    });
   };  
   
   

@@ -4,7 +4,7 @@ var db = require("../models");
 var region="us-east-2";
 var requestify=require("requestify");
 
-router.get("/dashboard/:username", function(req, res) {
+router.get("/dashboard/:username",isAuthenticated, function(req, res) {
     var userinfo={
         name:req.params.usernam
     }
@@ -51,28 +51,46 @@ router.get("/sidebar/:view",function(req,res){
 module.exports = router;
 
 //TODO add authentication token check
+
+
 function isAuthenticated(req,res,next){
-
-var jwt = require('jsonwebtoken');
-var jwkToPem = require('jwk-to-pem');
-var pem = getPem();
-jwt.verify(sessionStorage.getItem("idToken"), pem, { algorithms: ['RS256'] }, function(err, decodedToken) {
-}).then(function(result){
-    console.log("Checking Authentication");
-    console.log(result);
+var token=req.params.username;
+db.Owner.findOne({where:{user_name:token}}).then(function(result){
+if(result){
     next();
-}); 
+}
+else{
+    res.redirect("/");
+}
+})
+    
+}
 
-        }
 
 
-        function getPem() {
-            var userPoolId = 'us-east-2_vq6Vzx6C2'
-            const jwkUrl = `https://cognito-idp.${region}.amazonaws.com/${userPoolId}/.well-known/jwks.json`;
+
+// function isAuthenticated(req,res,next){
+
+// var jwt = require('jsonwebtoken');
+// var jwkToPem = require('jwk-to-pem');
+// var pem = getPem();
+// jwt.verify(sessionStorage.getItem("idToken"), pem, { algorithms: ['RS256'] }, function(err, decodedToken) {
+// }).then(function(result){
+//     console.log("Checking Authentication");
+//     console.log(result);
+//     next();
+// }); 
+
+//         }
+
+
+//         function getPem() {
+//             var userPoolId = 'us-east-2_vq6Vzx6C2'
+//             const jwkUrl = `https://cognito-idp.${region}.amazonaws.com/${userPoolId}/.well-known/jwks.json`;
           
-            return requestify.request(jwkUrl, { method: 'get', dataType: 'json'})
-              .then(res => res.getBody()['keys'].shift())
-              .then(jwk => jwkToPem(jwk))
-            ;
-          }
+//             return requestify.request(jwkUrl, { method: 'get', dataType: 'json'})
+//               .then(res => res.getBody()['keys'].shift())
+//               .then(jwk => jwkToPem(jwk))
+//             ;
+//           }
 

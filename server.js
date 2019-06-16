@@ -40,3 +40,4 @@ Handlebars.registerHelper("equals", function(string1 ,string2, options) {
       return options.inverse(this);
   }
 });
+
