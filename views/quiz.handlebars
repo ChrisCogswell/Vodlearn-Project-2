@@ -46,13 +46,24 @@ submitQuiz();
 })
 
 function submitQuiz(){
-
+var quizresults={}
 var useranswers=[]
 questionlist.forEach(function(question){
 useranswers.push(new QuestionObject(question.id,parseInt($("input[name=choice-"+question.id+"]").val())));
 })
+{{#if userid}}
+quizresults.results=useranswers;
+quizresults.user={{userid}};
+
+$.post("/quiz/grade",quizresults,function(data){
+console.log(data);
+})
+
+
+{{/if}}
 
 console.log(useranswers);
+
 
 }
 

@@ -13,7 +13,7 @@ var db = require("../models");
 
 //ADD QUIZ USER
   router.post("/api/adduser",(req,res)=>{
-    db.User.create({user_name:req.body.user_name,email:req.body.email}).then(function(results){
+    db.User.create({user_name:req.body.user_name,email:req.body.email, QuizId: req.body.QuizId}).then(function(results){
       res.json(results);
     });
 

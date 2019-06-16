@@ -194,7 +194,7 @@ function addSideBarEventListener(){
 
     $("#users-button").on("click", 
   function (){
-  $.get( "/userlist", function( data ) {
+  $.get( "/userlist/{{id}}", function( data ) {
           $( "#display-stage" ).html( data );
           // document.getElementById("display-stage").innerHTML=data;
         });

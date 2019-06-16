@@ -46,7 +46,7 @@ $(".close-button").on("click",function(){
 function addUser(){
 $("#user-table").append("<tr><td><a>"+$("#adduser-name").val()+ "</a></td><td>"+ $("#adduser-email").val()+"</td> <td></td><td><img src='/assets/delete-button.svg'></td></tr>");
 
-$.post("/api/adduser",{user_name:$("#adduser-name").val(),email:$("#adduser-email").val()},function(data){
+$.post("/api/adduser",{user_name:$("#adduser-name").val(),email:$("#adduser-email").val(),QuizId:{{quizid}} },function(data){
 
 })
 

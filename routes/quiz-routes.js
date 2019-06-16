@@ -21,17 +21,45 @@ router.get("/quiz/:id", (req,res)=>{
 
 
 router.post("/quiz/grade", (req,res)=>{
+console.log(req.body);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+res.json({results:"Swag"});
 });
 
-router.get("quiz/user/:id",(req,res)=>{
-  res.render("quiz", {
-    quiz_id:quiz.id,
-    quiz_name: quiz.quiz_name,
-    question: questions,
+router.get("/quiz/user/:id",(req,res)=>{
 
+  db.Quiz.findOne({include:[{model:db.User, where:{id:req.params.id}},{model:db.Question}]}).then(function(result){
+    console.log("??????????????????????RESULT?????????????????????????");
+console.log(result);
+console.log(result.Users);
+console.log(result.Users[0].id);
+res.render("quiz", {
+    userid:result.Users[0].id,
+    quiz_id:result.id,
+    quiz_name: result.quiz_name,
+    question: result.Questions,
 });
+
+  });
+
+
+
+  
 });
 
 router.get("/quiz/choices/:id", (req,res)=>{
