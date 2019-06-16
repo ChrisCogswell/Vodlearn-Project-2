@@ -227,7 +227,7 @@ body{
 
 .dash-listitem{
     padding: 0px;
-    color: white;
+    color: orange;
     font-family: 'Oswald', sans-serif;
     /* text-align: center; */
     font-size: 25px;
@@ -504,4 +504,13 @@ border-width: 0;
 }
 .close-button:hover {
     background-color: darkgray;
+}
+
+ol {
+    font-size: 20px;
+    margin-left: 30%;
+}
+
+#submit-quiz {
+    margin-left: 30%;
 }

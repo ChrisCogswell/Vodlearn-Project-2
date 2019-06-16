@@ -55,11 +55,17 @@ var $toggleBack = document.getElementById('submit-button');
 
 $toggle.addEventListener('click', function() {
     var isOpen = $slider.classList.contains('signup-container');
-
-$toggleBack    
-
+     
     $slider.setAttribute('class', isOpen ? 'slide-out' : 'signup-container');
 });
+
+          
+$toggleBack.addEventListener('click', function() {
+                var isOpen = $slider.classList.contains('signup-container');
+                   
+    $slider.setAttribute('class', isOpen ? 'slide-out' : 'signup-container');
+});
+
 
 
 
