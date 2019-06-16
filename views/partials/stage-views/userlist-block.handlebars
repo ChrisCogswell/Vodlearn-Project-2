@@ -1,16 +1,74 @@
-<table>
+<table id="user-table">
      <tr>
     <th>Name</th>
+    <th>Email</th>
     <th>Score</th> 
     <th></th>
     <th></th>
   </tr>
  {{#each userlist}}
  <tr id={{id}}>
-  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
-    <td>{{createdAt}}</td> 
-    <td></td>
-    <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
+  <td><a>{{user_name}}</a></td>
+    <td>{{email}}</td> 
+    <td>{{score}}%</td>
+    <td><a onclick="sendInvite({{id}},{{quizid}})">Share</a></td>
+    <td><img id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
 </table>
+
+<button onclick="showAddUser()" class="dashboard-button">Add User</button>
+<div class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+  <h2>Add User</h2>
+  <form>
+    <label>Name:</label>
+    <input id="adduser-name" type="text">
+    <br>
+    <label>Email:</label>
+    <input id="adduser-email" type="email">
+  </form>
+  <button onclick="addUser()">Add User</button>
+</div>
+</div>
+
+<script>
+
+function showAddUser(){
+$(".modal").addClass("show-modal");
+}
+
+$(".close-button").on("click",function(){
+  $(".modal").removeClass("show-modal");
+  $("#adduser-name").val("");
+  $("#adduser-email").val("");
+});
+
+function addUser(){
+$("#user-table").append("<tr><td><a>"+$("#adduser-name").val()+ "</a></td><td>"+ $("#adduser-email").val()+"</td> <td></td><td><img src='/assets/delete-button.svg'></td></tr>");
+
+$.post("/api/adduser",{user_name:$("#adduser-name").val(),email:$("#adduser-email").val(),QuizId:{{quizid}} },function(data){
+
+})
+
+}
+
+
+function sendInvite(id,quizid){
+console.log("sent");
+var data={
+userid:id,
+quizid:quizid
+}
+
+$.post("/api/sendinvite",data,function(){
+
+})
+
+}
+
+
+
+
+</script>

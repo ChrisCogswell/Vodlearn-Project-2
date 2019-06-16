@@ -15,14 +15,19 @@
 <form>
 <ol>
  {{#each question}}
-<li id={{id}}>
-{{question}}
+<li >
+  {{question}}
+  <br>
+  <div id={{id}} class="choice-div">
 
+</div>
 </li>
 <br>
 {{/each}}
 </ol>
 </form>
+
+<button id="submit-button" class="dashboard-button">Submit</button>
 
 {{!-- {{#each choice}}
 <h1>{{choice}}</h1>
@@ -30,21 +35,63 @@
 
 
 <script>
+  var questionlist;
 $(document).ready(function(){
   getChoices();
 })
+
+$("#submit-button").on("click",function(){
+submitQuiz();
+
+})
+
+function submitQuiz(){
+var quizresults={}
+var useranswers=[]
+questionlist.forEach(function(question){
+useranswers.push(new QuestionObject(question.id,parseInt($("input[name='choice-"+question.id+"']:checked").val())));
+})
+{{#if userid}}
+quizresults.results=useranswers;
+quizresults.user={{userid}};
+
+$.post("/quiz/grade",quizresults,function(data){
+console.log(data);
+})
+
+
+{{/if}}
+
+console.log(useranswers);
+
+
+}
 
 
 function getChoices(){
 $.get("/quiz/choices/{{quiz_id}}", function(data){
 console.log(data);
+questionlist=data;
+data.forEach(function(question){
+question.Choices.forEach(function(choice){
+$("#"+question.id).append("<p class='choice-div'>"+choice.choice+"</p><input id='questionchoice-"+choice.id+"' value="+choice.id+" name='choice-"+question.id+"' type='radio'>");
+
+})
+
+
+});
+
+
 })
 
 
 
 }
 
-
+function QuestionObject(questionid,choiceid){
+this.questionid=questionid,
+this.choiceid=choiceid
+}
 
 
 
