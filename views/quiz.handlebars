@@ -49,7 +49,7 @@ function submitQuiz(){
 var quizresults={}
 var useranswers=[]
 questionlist.forEach(function(question){
-useranswers.push(new QuestionObject(question.id,parseInt($("input[name=choice-"+question.id+"]").val())));
+useranswers.push(new QuestionObject(question.id,parseInt($("input[name='choice-"+question.id+"']:checked").val())));
 })
 {{#if userid}}
 quizresults.results=useranswers;

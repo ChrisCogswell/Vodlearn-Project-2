@@ -62,4 +62,20 @@ $toggleBack
     $slider.setAttribute('class', isOpen ? 'slide-out' : 'signup-container');
 });
 
+$("#create-account-button").on("click", createAccount);
 
+
+function createAccount(){
+data={
+username:$("#username-input-signup").val(),
+email: $("#email-input-signup").val(),
+password: $("#password-input-signup").val()
+
+}
+
+
+$.post("/signup",data,function(results){
+    alert(results.err.message);
+})
+
+}

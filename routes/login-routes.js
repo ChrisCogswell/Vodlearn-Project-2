@@ -30,15 +30,17 @@ router.post('/signup', (req,res)=>{
     userPool.signUp(req.body.username, req.body.password, attributeList, null, function(err, result){
         if (err) {
             try{
+            res.json({err:err})
             console.log(err);}
             catch(err){
                 console.log(err);
             }
+         
             return;
         }
         cognitoUser = result.user;
         console.log('user name is ' + cognitoUser.getUsername());
-        res.redirect('/');
+        res.redirect('/dashboard/'+cognitoUser.getUsername());
     
     });
     
@@ -79,7 +81,6 @@ router.post('/login', (req,res)=>{
 
     });
 
-    
 });
 
 router.post("/signout/",(req,res)=>{

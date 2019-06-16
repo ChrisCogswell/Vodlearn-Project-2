@@ -30,18 +30,18 @@
     {{!-- <h1>Join Us!</h1> --}}
 <button id="signup-button">SIGN UP</button>
 </div>
-<form id="signup-form" method="post" action="/signup">
+<form id="signup-form">
 {{!-- <h2>SIGN UP</h2> --}}
 <label class="signup-label">USERNAME:</label>
-<input class="signup-input" type="text" value="ENTER USERNAME" name="username">
-<label class="signup-label">EMAIL:</label>
-<input class="signup-input" type="email" value="ENTER EMAIL">
+<input id="username-input-signup" class="signup-input" type="text" value="ENTER USERNAME" name="username">
+<label  class="signup-label">EMAIL:</label>
+<input id="email-input-signup"class="signup-input" type="email" value="ENTER EMAIL">
 <label class="signup-label">PASSWORD:</label>
-<input class="signup-input" type="password" value="ENTER PASSWORD" name="password">
+<input id="password-input-signup" class="signup-input" type="password" value="ENTER PASSWORD" name="password">
 <label  class="signup-label">CONFIRM PASSWORD:</label>
 <input class="signup-input" type="password" value="CONFIRM PASSWORD">
 <p id="signup-message"></p>
-<input class="submit-button" type="submit" value="CREATE ACCOUNT">
+<input  id="create-account-button" class="submit-button" value="CREATE ACCOUNT">
 </form>
 </div>
 </div>

@@ -1,6 +1,9 @@
 var express = require("express");
+const dotenv = require('dotenv');
+dotenv.config();
 var router = express.Router();
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const AWS = require("aws-sdk");
 global.fetch = require('node-fetch');
 var db = require("../models");
 
@@ -71,6 +74,83 @@ router.delete("/api/deletequiz/questions/:id",function(req,res){
     res.json(result);
   });
 })
+
+
+
+
+router.post("/api/sendinvite",function(req,res){
+
+console.log("www.vodlearn.com/quiz/user/"+req.body.userid)
+db.User.findOne({where:{id:req.body.userid}}).then(function(result){
+
+console.log("To "+result.email);
+
+
+
+
+// AWS.config.update({
+//   accessKeyId: process.env.ACCESS_KEY,
+//   secretAccessKey: process.env.SECRET_KEY,
+//   region: process.env.AWSREGION
+// });
+
+// const ses = new AWS.SES({ apiVersion: "2010-12-01" });
+// const params = {
+// Destination: {
+//   ToAddresses: [result.email] // Email address/addresses that you want to send your email
+// },
+// // ConfigurationSetName: <<ConfigurationSetName>>,
+// Message: {
+//   Body: {
+//     Html: {
+//       // HTML Format of the email
+//       Charset: "UTF-8",
+//       Data:
+//         "<html><body><h1>Hello  Charith</h1><p style='color:red'>Sample description</p> <p>Time 1517831318946</p></body></html>"
+//     },
+//     Text: {
+//       Charset: "UTF-8",
+//       Data: "Hello Charith Sample description time 1517831318946"
+//     }
+//   },
+//   Subject: {
+//     Charset: "UTF-8",
+//     Data: "Test email"
+//   }
+// },
+// Source: "invites@vodlearn.com"
+// };
+
+// const sendEmail = ses.sendEmail(params).promise();
+
+// sendEmail
+// .then(data => {
+//   console.log("email submitted to SES", data);
+// })
+// .catch(error => {
+//   console.log(error);
+// });
+
+
+
+})
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;
