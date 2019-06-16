@@ -54,15 +54,18 @@ module.exports = router;
 
 
 function isAuthenticated(req,res,next){
-var token=req.params.username;
-db.Owner.findOne({where:{user_name:token}}).then(function(result){
-if(result){
-    next();
-}
-else{
-    res.redirect("/");
-}
-})
+
+next();
+
+// var token=req.params.username;
+// db.Owner.findOne({where:{user_name:token}}).then(function(result){
+// if(result.token){
+//     next();
+// }
+// else{
+//     res.redirect("/");
+// }
+// })
     
 }
 
