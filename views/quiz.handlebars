@@ -1,6 +1,7 @@
 <div class="nav-bar">
 
-<h1>{{quiz_name}}</h1>
+<h1 id="quiz-title">{{quiz_name}}</h1><br>
+{{!-- <img src="/assets/images/apple.png" alt="Logo" style="width:20px;height:35px;"> --}}
 <br>
 <a id="sign-out">Sign Out</a>
 </div>
@@ -12,12 +13,11 @@
 
 {{/each}} --}}
 <br>
-<form>
+<form id="quiz-form">
 <ol>
  {{#each question}}
-<li >
-  {{question}}
-  <br>
+<li id="question-number">
+  <p id="question-style">{{question}}</p>
   <div id={{id}} class="choice-div">
 
 </div>
@@ -25,38 +25,66 @@
 <br>
 {{/each}}
 </ol>
+<button id="submit-quiz" class="dashboard-button">Submit</button>
 </form>
 
-<button class="dashboard-button" id="submit-quiz">Submit</button>
+
+{{!-- {{#each choice}}
+<h1>{{choice}}</h1>
+{{/each}} --}}
 
 
 <script>
+  var questionlist;
 $(document).ready(function(){
   getChoices();
 })
 
+$("#submit-button").on("click",function(){
+submitQuiz();
 
-function getChoices(){
-$.get("/quiz/choices/{{quiz_id}}", function(data){
+})
+
+function submitQuiz(){
+var quizresults={}
+var useranswers=[]
+questionlist.forEach(function(question){
+useranswers.push(new QuestionObject(question.id,parseInt($("input[name=choice-"+question.id+"]").val())));
+})
+{{#if userid}}
+quizresults.results=useranswers;
+quizresults.user={{userid}};
+
+$.post("/quiz/grade",quizresults,function(data){
 console.log(data);
-
-data.forEach(function(question){
-question.Choices.forEach(function(choice){
-$("#"+question.id).append("<p class='choice-div'>"+choice.choice+"</p><input type='radio'>");
-
 })
 
 
-});
+{{/if}}
 
-
-})
-
+console.log(useranswers);
 
 
 }
 
 
+function getChoices(){
+$.get("/quiz/choices/{{quiz_id}}", function(data){
+console.log(data);
+questionlist=data;
+data.forEach(function(question){
+question.Choices.forEach(function(choice){
+$("#"+question.id).append("<input id='questionchoice-"+choice.id+"' value="+choice.id+" name='choice-"+question.id+"' type='radio'>"+"<p class='choice-div'>"+choice.choice+"</p>"+"<br>");
+
+      })
+    });
+  })
+}
+
+function QuestionObject(questionid,choiceid){
+this.questionid=questionid,
+this.choiceid=choiceid
+}
 
 
 

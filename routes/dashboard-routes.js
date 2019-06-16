@@ -25,9 +25,9 @@ router.get("/quizlist", function(req, res) {
             });
       });
 
-router.get("/userlist", function(req, res) {
-        db.User.findAll({}).then(function(result) {
-            res.render("dashboard-stage",{layout: false, view:"userlist", userlist:result});
+router.get("/userlist/:quizid", function(req, res) {
+        db.User.findAll({where:{QuizId:req.params.quizid}}).then(function(result) {
+            res.render("dashboard-stage",{layout: false, view:"userlist", userlist:result, quizid: req.params.quizid});
                 });
           });
   

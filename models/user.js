@@ -10,7 +10,22 @@ module.exports = function(sequelize, DataTypes) {
       email:{
         type:DataTypes.STRING,
   
+      },
+      attempts:{
+        type:DataTypes.INTEGER,
+        defaultValue:0
+      },
+      results: {
+        type: DataTypes.TEXT,
+         get: function () {
+              return JSON.parse(this.getDataValue('value'));
+          },
+          set: function (value) {
+              this.setDataValue('value', JSON.stringify(value));
+          }
       }
+
+
       });
 
       User.associate=function(models){
