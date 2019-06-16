@@ -1,7 +1,7 @@
 var express = require("express");
 const dotenv = require('dotenv');
 dotenv.config();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 80;
 var db = require("./models");
 var app = express();
 var Handlebars=require("handlebars");

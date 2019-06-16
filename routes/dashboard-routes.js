@@ -67,8 +67,6 @@ else{
 }
 
 
-
-
 // function isAuthenticated(req,res,next){
 
 // var jwt = require('jsonwebtoken');
