@@ -1,5 +1,5 @@
 body{
-    background-color:antiquewhite;
+    background-color:white;
     color: black;
     font-family: 'Open Sans', sans-serif;
     padding: 0px;
@@ -513,12 +513,14 @@ border-width: 0;
 }
 
 #quiz-form {
-    border: 3px double  black;
+    /* border: 3px double  black; */
     border-radius: 5px;
     margin-left: 15%;
     margin-right: 15%;
     margin-top: 10px;
     background-color: whitesmoke;
+    box-shadow: 5px 10px 8px 5px rgba(0, 0, 0, 0.137);
+
 }
 
 ol {
