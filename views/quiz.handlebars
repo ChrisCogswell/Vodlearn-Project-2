@@ -5,18 +5,12 @@
 <a id="sign-out">Sign Out</a>
 </div>
 
-
-{{!-- {{#each quiz}}
-
-<h1>Quiz Name: {{quiz_name}}</h1>
-
-{{/each}} --}}
 <br>
-<form>
+<form id="quiz-form">
 <ol>
  {{#each question}}
-<li >
-  {{question}}
+<li id="question-number">
+   <p id="question-style">{{question}}</p>
   <br>
   <div id={{id}} class="choice-div">
 
@@ -28,11 +22,6 @@
 </form>
 
 <button id="submit-button" class="dashboard-button">Submit</button>
-
-{{!-- {{#each choice}}
-<h1>{{choice}}</h1>
-{{/each}} --}}
-
 
 <script>
   var questionlist;
