@@ -15,15 +15,6 @@ module.exports = function(sequelize, DataTypes) {
         type:DataTypes.INTEGER,
         defaultValue:0
       },
-      // results: {
-      //   type: DataTypes.TEXT,
-      //    get: function () {
-      //         return JSON.parse(this.getDataValue('value'));
-      //     },
-      //     set: function (value) {
-      //         this.setDataValue('value', JSON.stringify(value));
-      //     }
-      // },
       score:{
         type:DataTypes.FLOAT,
         defaultValue:0

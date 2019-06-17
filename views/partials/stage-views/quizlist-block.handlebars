@@ -7,11 +7,10 @@
     <th></th>
   </tr>
  {{#each quizlist}}
- 
  <tr id={{id}}>
-    <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
-    <td>{{category}}</td> 
+  <td><a  data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
     <td>{{createdAt}}</td> 
+    <td></td>
     <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
