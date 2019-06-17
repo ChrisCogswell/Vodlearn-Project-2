@@ -4,12 +4,14 @@
     <th>Email</th>
     <th>Score</th> 
     <th></th>
+    <th></th>
   </tr>
  {{#each userlist}}
  <tr id={{id}}>
   <td><a>{{user_name}}</a></td>
     <td>{{email}}</td> 
-    <td></td>
+    <td>{{score}}%</td>
+    <td><a onclick="sendInvite({{id}},{{quizid}})">Share</a></td>
     <td><img id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
@@ -50,7 +52,23 @@ $.post("/api/adduser",{user_name:$("#adduser-name").val(),email:$("#adduser-emai
 
 })
 
+}
+
+
+function sendInvite(id,quizid){
+console.log("sent");
+var data={
+userid:id,
+quizid:quizid
+}
+
+$.post("/api/sendinvite",data,function(){
+
+})
 
 }
+
+
+
 
 </script>

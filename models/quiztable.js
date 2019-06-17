@@ -10,6 +10,10 @@ module.exports = function(sequelize, DataTypes) {
   Quiz.associate = function(models) {
     Quiz.hasMany(models.Question);
     Quiz.hasMany(models.User);
+    Quiz.belongsTo(models.Owner, {
+      foreignKey: {allowNull: false }, 
+        onDelete: "cascade"
+    });
   };  
   
   

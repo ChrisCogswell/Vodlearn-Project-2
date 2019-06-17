@@ -6,12 +6,6 @@
 <a id="sign-out">Sign Out</a>
 </div>
 
-
-{{!-- {{#each quiz}}
-
-<h1>Quiz Name: {{quiz_name}}</h1>
-
-{{/each}} --}}
 <br>
 <form id="quiz-form">
 <ol>
@@ -29,11 +23,6 @@
 </form>
 
 
-{{!-- {{#each choice}}
-<h1>{{choice}}</h1>
-{{/each}} --}}
-
-
 <script>
   var questionlist;
 $(document).ready(function(){
@@ -49,7 +38,7 @@ function submitQuiz(){
 var quizresults={}
 var useranswers=[]
 questionlist.forEach(function(question){
-useranswers.push(new QuestionObject(question.id,parseInt($("input[name=choice-"+question.id+"]").val())));
+useranswers.push(new QuestionObject(question.id,parseInt($("input[name='choice-"+question.id+"']:checked").val())));
 })
 {{#if userid}}
 quizresults.results=useranswers;

@@ -11,7 +11,7 @@
 
 <div class="login-container">
     
-<form id="login-form" method="post" action="/login">
+<form id="login-form" >
 <div class="center">
 <div class="form-group">
 <label  class="login-label">USERNAME:</label>
@@ -31,14 +31,14 @@
     {{!-- <h1>Join Us!</h1> --}}
 <button id="signup-button">SIGN UP</button>
 </div>
-<form id="signup-form" method="post" action="/signup">
+<form id="signup-form">
 {{!-- <h2>SIGN UP</h2> --}}
 <label class="signup-label">USERNAME:</label>
-<input class="signup-input" type="text" value="ENTER USERNAME" name="username">
-<label class="signup-label">EMAIL:</label>
-<input class="signup-input" type="email" value="ENTER EMAIL">
+<input id="username-input-signup" class="signup-input" type="text" value="ENTER USERNAME" name="username">
+<label  class="signup-label">EMAIL:</label>
+<input id="email-input-signup"class="signup-input" type="email" value="ENTER EMAIL">
 <label class="signup-label">PASSWORD:</label>
-<input class="signup-input" type="password" value="ENTER PASSWORD" name="password">
+<input id="password-input-signup" class="signup-input" type="password" value="ENTER PASSWORD" name="password">
 <label  class="signup-label">CONFIRM PASSWORD:</label>
 <input class="signup-input" type="password" value="CONFIRM PASSWORD">
 <p id="signup-message"></p>
@@ -60,8 +60,9 @@
 <h1>Coming Soon</h1>
 <ul>
     <li>Add Video Lessons into your Custom Quizzes</li>
-    <li>Create Full lesson Plans including Slide-Shows & Adiitional Reading Material</li>
+    <li>Create Full lesson Plans including Slide-Shows & Aditional Reading Material</li>
     <li>Full User Statistics including Tracking and Progress Features</li>
+    <li>Slack Integration</li>
 </ul>
 
 </div>

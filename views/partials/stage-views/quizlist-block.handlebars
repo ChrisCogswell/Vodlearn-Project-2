@@ -7,13 +7,11 @@
     <th></th>
   </tr>
  {{#each quizlist}}
- {{!-- <tr>
-  <td><a href="/quiz/{{id}}">{{quiz_name}}</a></td> --}}
+ 
  <tr id={{id}}>
     <td><a href="/quiz/{{id}}" data-quizid={{id}}  onclick="updateQuiz({{id}})">{{quiz_name}}</a></td>
     <td>{{category}}</td> 
     <td>{{createdAt}}</td> 
-    {{!-- <td><a href="/quiz/{{id}}">{{type}}</a></td> --}}
     <td><img onclick="deleteQuiz({{id}})" id="delete-button" src="/assets/delete-button.svg"></td>
     </tr>
 {{/each}}
@@ -71,7 +69,6 @@ function addSideBarEventListener(){
       $.get( "/quizlist", function( data ) {
           $( "#display-stage" ).html( data );
           getSideBar("main");
-          // document.getElementById("display-stage").innerHTML=data;
         });
   }
   );
@@ -81,7 +78,6 @@ function (){
 console.log("Display Settings");
     $.get( "/settings", function( data ) {
         $( "#display-stage" ).html( data );
-        // document.getElementById("display-stage").innerHTML=data;
       });
     }
     );

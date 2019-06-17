@@ -1,4 +1,6 @@
 var express = require("express");
+const dotenv = require('dotenv');
+dotenv.config();
 var PORT = process.env.PORT || 3000;
 var db = require("./models");
 var app = express();
@@ -6,6 +8,7 @@ var PORT = process.env.PORT || 3000;
 
 var Handlebars=require("handlebars");
 var exphbs = require("express-handlebars");
+
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -31,7 +34,7 @@ app.use(dashboardroutes);
 app.use(quizroutes);
 app.use(loginroutes);
 
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

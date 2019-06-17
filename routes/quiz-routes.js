@@ -5,15 +5,7 @@ var router = express.Router();
 var db = require("../models");
 
 router.get("/quiz/:id", (req,res)=>{
-//Sequelize
-      // db.Quiz.findOne({where:{id:req.params.id}}).then(function(result1){
-      // db.Question.findAll({where:{QuizId:req.params.id}}).then(function(result2){
-      // db.Choice.findAll({where:{QuestionId:req.params.id}}).then(function(result3){ 
-      //   res.render("quiz", {
-      //     quiz: result1,
-      //     question: result2,
-      //     choice: result3
-      // });
+
       db.Quiz.findOne({where:{id:req.params.id}}).then(function(quiz){
       db.Question.findAll({where:{QuizId:quiz.id}}).then(function(questions){
         db.Choice.findAll().then(function(choice) {
@@ -32,67 +24,46 @@ router.get("/quiz/:id", (req,res)=>{
 
 
 router.post("/quiz/grade", (req,res)=>{
-console.log(req.body);
+  var choices=[];
+  var correct=0;
+  req.body.results.forEach(function(element){
+    choices.push(element.choiceid)
+  })
+  db.Choice.findAll({where:{id:choices}}).then(function(results){
+    results.forEach(function(choice){
+      if(choice.correct){
+        correct++;
+    }
+  });
+    var score=(correct/results.length)*100;
+   db.User.update({attempts:1, score:score},{where:{id:req.body.user}}).then(function(){
+      res.json({results:(correct/results.length)});
+  })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-res.json({results:"Swag"});
+})
 });
+
+
 
 router.get("/quiz/user/:id",(req,res)=>{
 
   db.Quiz.findOne({include:[{model:db.User, where:{id:req.params.id}},{model:db.Question}]}).then(function(result){
-    console.log("??????????????????????RESULT?????????????????????????");
-console.log(result);
-console.log(result.Users);
-console.log(result.Users[0].id);
-res.render("quiz", {
+    res.render("quiz", {
     userid:result.Users[0].id,
     quiz_id:result.id,
     quiz_name: result.quiz_name,
     question: result.Questions,
-});
+    });
 
   });
-
-
-
-  
 });
 
 router.get("/quiz/choices/:id", (req,res)=>{
   var quizarray=[];
- 
-
-// db.Question.findAll({where:{QuizId:req.params.id}}).then(function(questions){
-
-// questions.forEach(function(question){
-//   db.Choice.findAll({attributes: ['id', 'choice'], where:{QuestionId:question.id}}).then(function(choices){
-//     quizarray.push(new QuizObject(question.id, choices))
-//   })
-// })
-
-
 
   db.Question.findAll({include:[{model:db.Choice}],where:{QuizId:req.params.id}}).then(function(questions){
-    // questions.forEach(function(question){
-    //   db.Choice.findAll({attributes: ['id', 'choice'], where:{QuestionId:question.id}}).then(function(choices){
-    //     quizarray.push(new QuizObject(question.id, choices));
-    //    })
-res.json(questions);
+  
+    res.json(questions);
   })
  });
 
@@ -105,16 +76,3 @@ function QuizObject(id, choices){
   this.choices=choices
 }
 
-// function loadQuizdata(resolve,reject){
-
-//   db.Question.findAll({where:{QuizId:req.params.id}}).then(function(questions){
-
-//     questions.forEach(function(question){
-//       db.Choice.findAll({attributes: ['id', 'choice'], where:{QuestionId:question.id}}).then(function(choices){
-//         quizarray.push(new QuizObject(question.id, choices))
-//       })
-//     })
-//     resolve(quizarray);
-//   });
-
-// }
