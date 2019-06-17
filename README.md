@@ -1,7 +1,7 @@
 # vodlearn
 <h2>VODlearn is an easy to use learning managment system </h2>
 
-<a href="www.vodlearn.com">www.vodlearn.com</a>
+<a>www.vodlearn.com</a>
 <ul>
   <li>Create courses with content customized to your needs</li>
    <li>Manage users and track their progress</li>
